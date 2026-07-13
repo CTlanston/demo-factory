@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wizard-fake-engine",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:fake-engine"],
+      "port": 3210
+    },
+    {
+      "name": "wizard-real-engine",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "port": 3210
+    }
+  ]
+}

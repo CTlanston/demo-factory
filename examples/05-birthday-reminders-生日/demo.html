@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Book – Never Miss a Friend's Birthday</title>
+<style>
+  :root {
+    --coral: #ff6f61;
+    --coral-dark: #e6564a;
+    --cream: #fff8f3;
+    --text: #3a2f2a;
+    --muted: #8a7a72;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(180deg, #fff8f3 0%, #ffeee7 100%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 1rem;
+  }
+  .app { max-width: 640px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 1.25rem; }
+  header h1 { font-size: 1.7rem; margin: 0.25rem 0; }
+  .subtitle { color: var(--muted); font-size: 0.95rem; margin: 0; }
+
+  section { margin-bottom: 1.5rem; }
+  h2 { font-size: 1.1rem; margin: 0 0 0.6rem 0; color: var(--coral-dark); }
+
+  .reminder {
+    background: #fff2ee;
+    border: 1px solid #ffd6cc;
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.6rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .card-name { font-weight: 600; font-size: 1.02rem; }
+  .card-date { color: var(--muted); font-size: 0.9rem; }
+  .badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: #f1e9e4;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .badge.today {
+    background: var(--coral);
+    color: #fff;
+    font-weight: 600;
+  }
+  .card-notes {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .card-notes label {
+    display: block;
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-bottom: 0.25rem;
+  }
+  .card-notes textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.92rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #e6d9d1;
+    resize: vertical;
+  }
+  .card-notes-preview {
+    margin-top: 0.4rem;
+    font-size: 0.87rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.88rem;
+    background: #f1e9e4;
+    color: var(--text);
+  }
+  button.primary {
+    background: var(--coral);
+    color: #fff;
+    font-weight: 600;
+  }
+  button.small { padding: 0.3rem 0.7rem; font-size: 0.8rem; margin-top: 0.5rem; }
+
+  .add-friend {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .add-friend form { display: flex; flex-direction: column; gap: 0.3rem; }
+  .add-friend label { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+  .add-friend input, .add-friend textarea {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.55rem;
+    border-radius: 8px;
+    border: 1px solid #e6d9d1;
+    width: 100%;
+  }
+  .hint { font-size: 0.78rem; color: var(--muted); margin: 0.1rem 0 0 0; }
+  .add-friend button[type="submit"] {
+    margin-top: 0.8rem;
+    background: var(--coral);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.65rem;
+    font-size: 1rem;
+  }
+
+  .controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+    flex-wrap: wrap;
+  }
+  .controls input, .controls select {
+    font-family: inherit;
+    font-size: 0.92rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #e6d9d1;
+  }
+  .controls input { flex: 1; min-width: 140px; }
+
+  .empty-note { color: var(--muted); font-size: 0.9rem; text-align: center; padding: 0.5rem; }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>🎂 Your Birthday Book</h1>
+      <p class="subtitle" id="subtitle"></p>
+    </header>
+
+    <section>
+      <div class="reminder" id="reminder-banner"></div>
+    </section>
+
+    <section class="this-week">
+      <h2>This Week 🔔</h2>
+      <div id="this-week-list"></div>
+    </section>
+
+    <section class="add-friend">
+      <h2>Add a Friend</h2>
+      <form id="friend-form">
+        <label for="name-input">Name</label>
+        <input type="text" id="name-input" required placeholder="e.g. Alex Kim">
+
+        <label for="date-input">Birthday</label>
+        <input type="date" id="date-input" required>
+        <p class="hint">The year doesn't matter — just their month and day.</p>
+
+        <label for="notes-input">Gift ideas or notes (optional)</label>
+        <textarea id="notes-input" rows="2" placeholder="e.g. loves hiking, allergic to nuts"></textarea>
+
+        <button type="submit" class="primary">Add Friend</button>
+      </form>
+    </section>
+
+    <section class="all-friends">
+      <h2>All Friends</h2>
+      <div class="controls">
+        <input type="text" id="search-input" placeholder="Search by name...">
+        <select id="sort-select">
+          <option value="date">Sort: Upcoming birthday</option>
+          <option value="name">Sort: Name (A-Z)</option>
+        </select>
+      </div>
+      <div id="friends-list"></div>
+    </section>
+  </div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'demofactory:birthday-book:v1';
+  var MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function seedData() {
+    return [
+      { id: 'seed-1', name: 'Emma Rodriguez', month: 7, day: 12, notes: 'Mentioned wanting a small succulent or a nice plant for her desk.' },
+      { id: 'seed-2', name: 'Jake Chen', month: 7, day: 18, notes: 'Big board game fan — something from a local game store would be perfect.' },
+      { id: 'seed-3', name: 'Priya Patel', month: 11, day: 2, notes: 'Loves cozy mystery novels and good coffee.' }
+    ];
+  }
+
+  function isValidEntry(e) {
+    return e && typeof e === 'object' &&
+      typeof e.id === 'string' && e.id.length > 0 &&
+      typeof e.name === 'string' && e.name.trim().length > 0 &&
+      Number.isInteger(e.month) && e.month >= 1 && e.month <= 12 &&
+      Number.isInteger(e.day) && e.day >= 1 && e.day <= 31;
+  }
+
+  function normalize(parsed) {
+    if (!Array.isArray(parsed)) return null;
+    var valid = parsed.filter(isValidEntry).map(function (e) {
+      return {
+        id: e.id,
+        name: e.name,
+        month: e.month,
+        day: e.day,
+        notes: typeof e.notes === 'string' ? e.notes : ''
+      };
+    });
+    return valid.length ? valid : null;
+  }
+
+  function loadData() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return seedData();
+      var parsed = JSON.parse(raw);
+      var norm = normalize(parsed);
+      return norm || seedData();
+    } catch (err) {
+      return seedData();
+    }
+  }
+
+  function saveData(list) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    } catch (err) {
+      /* ignore storage errors (e.g. private mode quota) */
+    }
+  }
+
+  function escapeHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function computeDaysUntil(month, day) {
+    var now = new Date();
+    var todayMid = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var year = now.getFullYear();
+    var target = new Date(year, month - 1, day);
+    if (target < todayMid) {
+      target = new Date(year + 1, month - 1, day);
+    }
+    var diff = Math.round((target - todayMid) / 86400000);
+    return diff;
+  }
+
+  function formatDate(month, day) {
+    return (MONTH_NAMES[month - 1] || '') + ' ' + day;
+  }
+
+  function daysLabel(days) {
+    if (days === 0) return 'Today! 🎉';
+    if (days === 1) return 'Tomorrow';
+    return 'In ' + days + ' days';
+  }
+
+  var friends = loadData();
+  var searchTerm = '';
+  var sortMode = 'date';
+  var expandedIds = new Set();
+
+  (function initExpanded() {
+    var withDays = friends.map(function (f) {
+      return Object.assign({}, f, { days: computeDaysUntil(f.month, f.day) });
+    });
+    withDays.sort(function (a, b) { return a.days - b.days; });
+    if (withDays.length > 0) expandedIds.add(withDays[0].id);
+  })();
+
+  function getComputed(list) {
+    return list.map(function (f) {
+      return Object.assign({}, f, { days: computeDaysUntil(f.month, f.day) });
+    });
+  }
+
+  function getSorted(list, mode) {
+    var withDays = getComputed(list);
+    if (mode === 'name') {
+      withDays.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    } else {
+      withDays.sort(function (a, b) { return a.days - b.days; });
+    }
+    return withDays;
+  }
+
+  function renderReminder(thisWeek) {
+    var el = document.getElementById('reminder-banner');
+    if (!el) return;
+    var todays = thisWeek.filter(function (e) { return e.days === 0; });
+    var upcoming = thisWeek.filter(function (e) { return e.days > 0; });
+    var parts = [];
+    if (todays.length) {
+      parts.push('🎉 Today: ' + todays.map(function (e) { return escapeHtml(e.name); }).join(', ') +
+        (todays.length > 1 ? '\'s birthdays' : '\'s birthday') + '! Send a little message.');
+    }
+    if (upcoming.length) {
+      parts.push('Coming up: ' + upcoming.map(function (e) {
+        return escapeHtml(e.name) + ' (' + daysLabel(e.days).toLowerCase() + ')';
+      }).join(', ') + '. A gentle heads-up to reach out.');
+    }
+    if (!parts.length) {
+      parts.push('No birthdays this week — enjoy the calm! 😌');
+    }
+    el.innerHTML = parts.join(' ');
+  }
+
+  function cardHtml(entry, expanded) {
+    var badge = entry.days === 0
+      ? '<span class="badge today">Today 🎉</span>'
+      : '<span class="badge">' + escapeHtml(daysLabel(entry.days)) + '</span>';
+
+    var notesSection = '';
+    if (expanded) {
+      notesSection =
+        '<div class="card-notes">' +
+          '<label for="notes-' + entry.id + '">Gift ideas / notes</label>' +
+          '<textarea id="notes-' + entry.id + '" rows="2">' + escapeHtml(entry.notes) + '</textarea>' +
+          '<button type="button" class="small" onclick="birthdayBook.saveNote(\'' + entry.id + '\')">Save note</button>' +
+          '<button type="button" class="small" onclick="birthdayBook.toggleExpand(\'' + entry.id + '\')">Hide details ▲</button>' +
+        '</div>';
+    } else {
+      var preview = entry.notes ? escapeHtml(entry.notes) : 'No notes yet.';
+      notesSection =
+        '<div class="card-notes-preview">' + preview + '</div>' +
+        '<button type="button" class="small" onclick="birthdayBook.toggleExpand(\'' + entry.id + '\')">Show details ▼</button>';
+    }
+
+    return (
+      '<div class="card">' +
+        '<div class="card-row">' +
+          '<div>' +
+            '<div class="card-name">' + escapeHtml(entry.name) + '</div>' +
+            '<div class="card-date">' + escapeHtml(formatDate(entry.month, entry.day)) + '</div>' +
+          '</div>' +
+          badge +
+        '</div>' +
+        notesSection +
+      '</div>'
+    );
+  }
+
+  function weekCardHtml(entry) {
+    var badge = entry.days === 0
+      ? '<span class="badge today">Today 🎉</span>'
+      : '<span class="badge">' + escapeHtml(daysLabel(entry.days)) + '</span>';
+    return (
+      '<div class="card">' +
+        '<div class="card-row">' +
+          '<div>' +
+            '<div class="card-name">' + escapeHtml(entry.name) + '</div>' +
+            '<div class="card-date">' + escapeHtml(formatDate(entry.month, entry.day)) + '</div>' +
+          '</div>' +
+          badge +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function render() {
+    var sortedAll = getSorted(friends, 'date');
+    var thisWeek = sortedAll.filter(function (e) { return e.days <= 7 && e.days >= 0; });
+
+    renderReminder(thisWeek);
+
+    var weekEl = document.getElementById('this-week-list');
+    if (weekEl) {
+      if (thisWeek.length === 0) {
+        weekEl.innerHTML = '<p class="empty-note">Nothing this week. 🌤️</p>';
+      } else {
+        weekEl.innerHTML = thisWeek.map(weekCardHtml).join('');
+      }
+    }
+
+    var sorted = getSorted(friends, sortMode);
+    var term = searchTerm.trim().toLowerCase();
+    var filtered = term
+      ? sorted.filter(function (e) { return e.name.toLowerCase().indexOf(term) !== -1; })
+      : sorted;
+
+    var listEl = document.getElementById('friends-list');
+    if (listEl) {
+      if (filtered.length === 0) {
+        listEl.innerHTML = '<p class="empty-note">No friends found.</p>';
+      } else {
+        listEl.innerHTML = filtered.map(function (e) {
+          return cardHtml(e, expandedIds.has(e.id));
+        }).join('');
+      }
+    }
+
+    var subtitleEl = document.getElementById('subtitle');
+    if (subtitleEl) {
+      subtitleEl.textContent = 'Keeping track of ' + friends.length + ' friend' + (friends.length === 1 ? '' : 's') + '\'s birthdays';
+    }
+  }
+
+  function toggleExpand(id) {
+    if (expandedIds.has(id)) {
+      expandedIds.delete(id);
+    } else {
+      expandedIds.add(id);
+    }
+    render();
+  }
+
+  function saveNote(id) {
+    var ta = document.getElementById('notes-' + id);
+    if (!ta) return;
+    var idx = friends.findIndex(function (f) { return f.id === id; });
+    if (idx === -1) return;
+    friends[idx].notes = ta.value;
+    saveData(friends);
+    render();
+  }
+
+  window.birthdayBook = { toggleExpand: toggleExpand, saveNote: saveNote };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('friend-form');
+    var nameInput = document.getElementById('name-input');
+    var dateInput = document.getElementById('date-input');
+    var notesInput = document.getElementById('notes-input');
+    var searchInput = document.getElementById('search-input');
+    var sortSelect = document.getElementById('sort-select');
+
+    if (form && nameInput && dateInput && notesInput) {
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var nameVal = (nameInput.value || '').trim();
+        var dateVal = dateInput.value || '';
+        if (!nameVal || !dateVal) return;
+        var parts = dateVal.split('-');
+        if (parts.length !== 3) return;
+        var month = parseInt(parts[1], 10);
+        var day = parseInt(parts[2], 10);
+        if (!Number.isInteger(month) || !Number.isInteger(day)) return;
+        var notesVal = (notesInput.value || '').trim();
+        var newEntry = {
+          id: 'f-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+          name: nameVal,
+          month: month,
+          day: day,
+          notes: notesVal
+        };
+        friends.push(newEntry);
+        saveData(friends);
+        expandedIds.add(newEntry.id);
+        form.reset();
+        render();
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        searchTerm = searchInput.value || '';
+        render();
+      });
+    }
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function () {
+        sortMode = sortSelect.value || 'date';
+        render();
+      });
+    }
+
+    render();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "demo-factory",
+  "version": "0.1.0",
+  "private": true,
+  "description": "One vague idea → jargon-free interview → 3 roadmap options → a clickable single-file live demo you own.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start:fake-engine": "DEMO_FACTORY_CLAUDE=./tests/fixtures/fake-claude.js FAKE_CLAUDE_MODE=wizard DEMO_FACTORY_LEDGER=/tmp/demo-factory-fake-ledger.jsonl node server.js",
+    "test": "node --test tests/*.test.js",
+    "e2e": "node personas/runner.js"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.43.1"
+  }
+}

@@ -1,0 +1,41 @@
+# CI runs G1 (unit) + a stubbed-engine E2E smoke.
+# IMPORTANT: the engine is STUBBED here (tests/fixtures/fake-claude.js) because CI has
+# no `claude` CLI and no API budget. This is clearly labeled by design — the real quality
+# gates (G2/G3/G4: 100 real-engine persona runs, 98/100) always run locally against the
+# real engine; their receipts live in EVIDENCE.md and metrics/.
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - name: G1 unit + server tests (engine stubbed — see header note)
+        run: npm test
+
+  e2e-smoke-stubbed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: E2E smoke through the real server, ENGINE STUBBED (CI only)
+        env:
+          DEMO_FACTORY_CLAUDE: ./tests/fixtures/fake-claude.js
+          FAKE_CLAUDE_MODE: wizard
+          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          node personas/runner.js --personas jz1 --seeds 1 --port 3611

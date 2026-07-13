@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>奶茶店价目表</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: #fdf3e7;
+    color: #4a3325;
+    min-height: 100%;
+  }
+  #bgLayer {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  #bgLayer::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(253, 243, 231, 0.86);
+  }
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 18px 16px 60px;
+  }
+  header { text-align: center; margin-bottom: 14px; }
+  header h1 {
+    font-size: 26px;
+    margin: 6px 0 2px;
+    color: #7a4a1f;
+  }
+  header .subtitle {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #a07850;
+  }
+  #shopNameInput {
+    font-size: 20px;
+    padding: 8px 10px;
+    width: 90%;
+    max-width: 320px;
+    border: 1px solid #d9b98c;
+    border-radius: 10px;
+    text-align: center;
+    background: #fffaf3;
+    color: #4a3325;
+  }
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #c97f3c;
+    color: #fff;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(201,127,60,0.35);
+  }
+  .icon-btn:active { transform: scale(0.97); }
+  .icon-btn.secondary {
+    background: #fff;
+    color: #c97f3c;
+    border: 1px solid #c97f3c;
+    box-shadow: none;
+  }
+  .icon-btn.danger {
+    background: #e0522f;
+    box-shadow: 0 3px 8px rgba(224,82,47,0.3);
+  }
+
+  #editPanel {
+    display: none;
+    background: #fffaf3;
+    border: 1px dashed #d9b98c;
+    border-radius: 14px;
+    padding: 14px;
+    margin: 14px 0;
+  }
+  #editPanel.open { display: block; }
+  .panel-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .panel-row label {
+    font-size: 14px;
+    color: #7a4a1f;
+    font-weight: bold;
+  }
+  .panel-row input[type="text"] {
+    flex: 1;
+    min-width: 160px;
+    padding: 7px 10px;
+    border: 1px solid #d9b98c;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .panel-row input[type="file"] { font-size: 13px; }
+
+  main { margin-top: 6px; }
+  .category-section { margin-bottom: 22px; }
+  .category-title {
+    font-size: 18px;
+    color: #7a4a1f;
+    border-left: 5px solid #c97f3c;
+    padding-left: 10px;
+    margin: 0 0 10px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    position: relative;
+    background: #fffaf3;
+    border-radius: 14px;
+    padding: 12px 12px 10px;
+    box-shadow: 0 2px 8px rgba(122,74,31,0.12);
+    border: 1px solid #f0ddc0;
+  }
+  .card.signature {
+    border: 1px solid #e8b23e;
+    background: linear-gradient(180deg, #fff6e0 0%, #fffaf3 60%);
+  }
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f7c948, #e8962c);
+    color: #5c3a00;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .card .item-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 4px;
+    color: #4a3325;
+    word-break: break-all;
+  }
+  .card .item-desc {
+    font-size: 12px;
+    color: #9a8066;
+    margin: 0 0 8px;
+    line-height: 1.4;
+    min-height: 16px;
+  }
+  .card .item-price {
+    font-size: 17px;
+    font-weight: bold;
+    color: #c97f3c;
+  }
+  .card .edit-fields input,
+  .card .edit-fields select,
+  .card .edit-fields textarea {
+    width: 100%;
+    font-size: 13px;
+    padding: 5px 7px;
+    border: 1px solid #d9b98c;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-family: inherit;
+  }
+  .card .edit-fields textarea { resize: vertical; min-height: 32px; }
+  .card .sig-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  .card .del-btn {
+    width: 100%;
+    background: #fdeceb;
+    color: #c0392b;
+    border: 1px solid #f0b8b0;
+    border-radius: 8px;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .empty-cat {
+    font-size: 13px;
+    color: #a99;
+    padding: 8px 0;
+  }
+
+  #addItemSection {
+    display: none;
+    background: #fffaf3;
+    border-radius: 14px;
+    padding: 14px;
+    margin: 18px 0;
+    border: 1px dashed #d9b98c;
+  }
+  #addItemSection.open { display: block; }
+  #addItemSection h2 { font-size: 16px; margin: 0 0 10px; color: #7a4a1f; }
+  #addItemForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  #addItemForm .full { grid-column: 1 / -1; }
+  #addItemForm input, #addItemForm select, #addItemForm textarea {
+    padding: 8px 10px;
+    border: 1px solid #d9b98c;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    width: 100%;
+  }
+  #addItemForm label {
+    font-size: 12px;
+    color: #7a4a1f;
+    display: block;
+    margin-bottom: 3px;
+  }
+  #addItemForm .sig-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .share-section {
+    margin-top: 26px;
+    text-align: center;
+    background: #fffaf3;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #f0ddc0;
+  }
+  .share-section h2 { font-size: 16px; margin: 0 0 10px; color: #7a4a1f; }
+  .qr-box {
+    display: inline-block;
+    background: #fff;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+  }
+  .share-tip { font-size: 12px; color: #a07850; margin: 10px 0; }
+  #copyStatus { display: block; margin-top: 8px; font-size: 12px; color: #4a8f4a; min-height: 16px; }
+
+  footer.hint {
+    text-align: center;
+    font-size: 11px;
+    color: #c2a98a;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 400px) {
+    header h1 { font-size: 22px; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<div id="bgLayer"></div>
+
+<div class="wrap">
+  <header>
+    <h1 id="shopNameDisplay">奶茶铺</h1>
+    <p class="subtitle">扫码看菜单 · 价格随时更新</p>
+    <button type="button" class="icon-btn" id="toggleEditBtn">✏️ 编辑价目表</button>
+  </header>
+
+  <section id="editPanel">
+    <div class="panel-row">
+      <label for="shopNameInput">店名</label>
+      <input type="text" id="shopNameInput" maxlength="20">
+    </div>
+    <div class="panel-row">
+      <label for="bgFileInput">🖼️ 店内照片背景</label>
+      <input type="file" id="bgFileInput" accept="image/*">
+      <button type="button" class="icon-btn secondary" id="removeBgBtn">移除背景</button>
+    </div>
+  </section>
+
+  <main id="menuContainer"></main>
+
+  <section id="addItemSection">
+    <h2>➕ 添加新饮品</h2>
+    <form id="addItemForm">
+      <div class="full">
+        <label for="newName">饮品名称</label>
+        <input type="text" id="newName" maxlength="20" required>
+      </div>
+      <div>
+        <label for="newCategory">分类</label>
+        <select id="newCategory">
+          <option value="奶茶">奶茶</option>
+          <option value="果茶">果茶</option>
+          <option value="小料">小料</option>
+        </select>
+      </div>
+      <div>
+        <label for="newPrice">价格（元）</label>
+        <input type="number" id="newPrice" min="0" step="0.5" required>
+      </div>
+      <div class="full">
+        <label for="newDesc">简介（可选）</label>
+        <textarea id="newDesc" maxlength="60" rows="2"></textarea>
+      </div>
+      <div class="full sig-check">
+        <input type="checkbox" id="newSignature">
+        <label for="newSignature" style="margin:0;">设为招牌推荐 🌟</label>
+      </div>
+      <div class="full">
+        <button type="submit" class="icon-btn">添加饮品</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="share-section">
+    <h2>📱 分享给顾客</h2>
+    <div class="qr-box">
+      <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <rect width="120" height="120" fill="#fff"/>
+        <rect x="8" y="8" width="30" height="30" fill="#4a3325"/>
+        <rect x="16" y="16" width="14" height="14" fill="#fff"/>
+        <rect x="82" y="8" width="30" height="30" fill="#4a3325"/>
+        <rect x="90" y="16" width="14" height="14" fill="#fff"/>
+        <rect x="8" y="82" width="30" height="30" fill="#4a3325"/>
+        <rect x="16" y="90" width="14" height="14" fill="#fff"/>
+        <rect x="46" y="8" width="8" height="8" fill="#4a3325"/>
+        <rect x="60" y="8" width="8" height="8" fill="#4a3325"/>
+        <rect x="46" y="24" width="8" height="8" fill="#4a3325"/>
+        <rect x="46" y="46" width="8" height="8" fill="#4a3325"/>
+        <rect x="60" y="46" width="8" height="8" fill="#4a3325"/>
+        <rect x="74" y="46" width="8" height="8" fill="#4a3325"/>
+        <rect x="46" y="60" width="8" height="8" fill="#4a3325"/>
+        <rect x="60" y="60" width="8" height="8" fill="#4a3325"/>
+        <rect x="90" y="60" width="8" height="8" fill="#4a3325"/>
+        <rect x="46" y="74" width="8" height="8" fill="#4a3325"/>
+        <rect x="74" y="74" width="8" height="8" fill="#4a3325"/>
+        <rect x="90" y="74" width="8" height="8" fill="#4a3325"/>
+        <rect x="46" y="90" width="8" height="8" fill="#4a3325"/>
+        <rect x="60" y="90" width="8" height="8" fill="#4a3325"/>
+        <rect x="74" y="90" width="8" height="8" fill="#4a3325"/>
+        <rect x="90" y="90" width="8" height="8" fill="#4a3325"/>
+        <rect x="106" y="46" width="8" height="8" fill="#4a3325"/>
+        <rect x="106" y="74" width="8" height="8" fill="#4a3325"/>
+      </svg>
+    </div>
+    <p class="share-tip">顾客扫码即可查看价目表（示意图）；也可以把这个页面文件发给顾客，或截图分享到朋友圈</p>
+    <button type="button" class="icon-btn secondary" id="copyTextBtn">复制文字菜单</button>
+    <span id="copyStatus"></span>
+  </section>
+
+  <footer class="hint">💡 点击「编辑价目表」即可修改价格、分类、上传店内照片</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "demofactory:naicha-pricelist:v1";
+  var CATEGORIES = ["奶茶", "果茶", "小料"];
+  var CATEGORY_ICON = { "奶茶": "🧋", "果茶": "🍹", "小料": "🍡" };
+
+  function genId() {
+    return "id_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+  }
+
+  function defaultData() {
+    return {
+      shopName: "阿珍奶茶铺",
+      bgImage: "",
+      items: [
+        { id: genId(), name: "招牌奥利奥奶茶", category: "奶茶", price: 16, desc: "锡兰红茶搭配香浓奥利奥碎，店里卖得最好的一杯", signature: true },
+        { id: genId(), name: "经典红茶奶茶", category: "奶茶", price: 12, desc: "醇香红茶配鲜奶，奶茶入门首选", signature: false },
+        { id: genId(), name: "抹茶拿铁", category: "奶茶", price: 15, desc: "日式抹茶粉手打，奶香浓郁不苦涩", signature: false },
+        { id: genId(), name: "桃桃乌龙", category: "果茶", price: 17, desc: "水蜜桃果肉加乌龙茶底，清爽多汁", signature: true },
+        { id: genId(), name: "满杯百香果", category: "果茶", price: 15, desc: "新鲜百香果肉打底，酸甜解腻", signature: false },
+        { id: genId(), name: "芒果柠檬茶", category: "果茶", price: 14, desc: "芒果与柠檬碰撞，酸甜开胃", signature: false },
+        { id: genId(), name: "Q弹珍珠", category: "小料", price: 3, desc: "现煮黑糖珍珠，软糯Q弹", signature: false },
+        { id: genId(), name: "椰果", category: "小料", price: 3, desc: "清爽脆口，任意饮品都能加", signature: false },
+        { id: genId(), name: "手作布丁", category: "小料", price: 4, desc: "香浓顺滑，加分小料首选", signature: false }
+      ]
+    };
+  }
+
+  function normalizeItem(raw) {
+    raw = raw && typeof raw === "object" ? raw : {};
+    var category = CATEGORIES.indexOf(raw.category) !== -1 ? raw.category : "奶茶";
+    var price = typeof raw.price === "number" && isFinite(raw.price) ? raw.price : 0;
+    return {
+      id: (typeof raw.id === "string" && raw.id) ? raw.id : genId(),
+      name: (typeof raw.name === "string" && raw.name.trim()) ? raw.name : "未命名饮品",
+      category: category,
+      price: price,
+      desc: typeof raw.desc === "string" ? raw.desc : "",
+      signature: !!raw.signature
+    };
+  }
+
+  function loadState() {
+    var fallback = defaultData();
+    var raw;
+    try {
+      raw = localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      return fallback;
+    }
+    if (!raw) return fallback;
+    var parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (e) {
+      return fallback;
+    }
+    if (!parsed || typeof parsed !== "object") return fallback;
+    var items = Array.isArray(parsed.items) ? parsed.items.map(normalizeItem) : fallback.items;
+    if (items.length === 0) items = fallback.items;
+    return {
+      shopName: (typeof parsed.shopName === "string" && parsed.shopName.trim()) ? parsed.shopName : fallback.shopName,
+      bgImage: typeof parsed.bgImage === "string" ? parsed.bgImage : "",
+      items: items
+    };
+  }
+
+  var state = loadState();
+  var editMode = false;
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      /* storage full or unavailable - fail silently, demo still works in-memory */
+    }
+  }
+
+  function applyBackground() {
+    var bgLayer = document.getElementById("bgLayer");
+    if (!bgLayer) return;
+    if (state.bgImage) {
+      bgLayer.style.backgroundImage = 'url("' + state.bgImage + '")';
+      bgLayer.style.display = "block";
+    } else {
+      bgLayer.style.backgroundImage = "";
+      bgLayer.style.display = "none";
+    }
+  }
+
+  function el(tag, props, children) {
+    var node = document.createElement(tag);
+    if (props) {
+      Object.keys(props).forEach(function (k) {
+        if (k === "text") {
+          node.textContent = props[k];
+        } else if (k === "class") {
+          node.className = props[k];
+        } else {
+          node[k] = props[k];
+        }
+      });
+    }
+    if (children) {
+      children.forEach(function (c) { if (c) node.appendChild(c); });
+    }
+    return node;
+  }
+
+  function buildCard(item) {
+    var card = el("div", { class: "card" + (item.signature ? " signature" : "") });
+
+    if (editMode) {
+      var fields = el("div", { class: "edit-fields" });
+
+      var nameInput = el("input", { type: "text", value: item.name, maxLength: 20 });
+      nameInput.addEventListener("change", function () {
+        item.name = nameInput.value.trim() || "未命名饮品";
+        save();
+      });
+
+      var catSelect = el("select", {});
+      CATEGORIES.forEach(function (c) {
+        var opt = el("option", { value: c, text: c });
+        if (c === item.category) opt.selected = true;
+        catSelect.appendChild(opt);
+      });
+      catSelect.addEventListener("change", function () {
+        item.category = catSelect.value;
+        save();
+        render();
+      });
+
+      var priceInput = el("input", { type: "number", min: "0", step: "0.5", value: String(item.price) });
+      priceInput.addEventListener("change", function () {
+        var v = parseFloat(priceInput.value);
+        item.price = isFinite(v) && v >= 0 ? v : 0;
+        save();
+      });
+
+      var descInput = el("textarea", { rows: 2, maxLength: 60, value: item.desc });
+      descInput.value = item.desc;
+      descInput.addEventListener("change", function () {
+        item.desc = descInput.value;
+        save();
+      });
+
+      var sigRow = el("div", { class: "sig-row" });
+      var sigCheck = el("input", { type: "checkbox", id: "sig_" + item.id, checked: item.signature });
+      sigCheck.checked = item.signature;
+      sigCheck.addEventListener("change", function () {
+        item.signature = sigCheck.checked;
+        save();
+        render();
+      });
+      var sigLabel = el("label", { text: "招牌推荐 🌟", htmlFor: "sig_" + item.id });
+      sigRow.appendChild(sigCheck);
+      sigRow.appendChild(sigLabel);
+
+      var delBtn = el("button", { type: "button", class: "del-btn", text: "🗑 删除此饮品" });
+      delBtn.addEventListener("click", function () {
+        state.items = state.items.filter(function (it) { return it.id !== item.id; });
+        save();
+        render();
+      });
+
+      fields.appendChild(nameInput);
+      fields.appendChild(catSelect);
+      fields.appendChild(priceInput);
+      fields.appendChild(descInput);
+      fields.appendChild(sigRow);
+      fields.appendChild(delBtn);
+      card.appendChild(fields);
+    } else {
+      if (item.signature) {
+        card.appendChild(el("span", { class: "badge", text: "🌟 招牌推荐" }));
+      }
+      card.appendChild(el("div", { class: "item-name", text: item.name }));
+      card.appendChild(el("div", { class: "item-desc", text: item.desc }));
+      card.appendChild(el("div", { class: "item-price", text: "¥" + item.price.toFixed(2) }));
+    }
+
+    return card;
+  }
+
+  function render() {
+    var shopNameDisplay = document.getElementById("shopNameDisplay");
+    var shopNameInput = document.getElementById("shopNameInput");
+    if (shopNameDisplay) shopNameDisplay.textContent = state.shopName;
+    if (shopNameInput) shopNameInput.value = state.shopName;
+
+    var menuContainer = document.getElementById("menuContainer");
+    if (menuContainer) {
+      menuContainer.textContent = "";
+      CATEGORIES.forEach(function (cat) {
+        var section = el("div", { class: "category-section" });
+        section.appendChild(el("h2", { class: "category-title", text: (CATEGORY_ICON[cat] || "") + " " + cat }));
+        var grid = el("div", { class: "grid" });
+        var items = state.items.filter(function (it) { return it.category === cat; });
+        if (items.length === 0) {
+          grid.appendChild(el("div", { class: "empty-cat", text: "暂无该分类饮品" }));
+        } else {
+          items.forEach(function (it) { grid.appendChild(buildCard(it)); });
+        }
+        section.appendChild(grid);
+        menuContainer.appendChild(section);
+      });
+    }
+
+    var editPanel = document.getElementById("editPanel");
+    var addItemSection = document.getElementById("addItemSection");
+    var toggleEditBtn = document.getElementById("toggleEditBtn");
+    if (editPanel) editPanel.className = editMode ? "open" : "";
+    if (addItemSection) addItemSection.className = editMode ? "open" : "";
+    if (toggleEditBtn) toggleEditBtn.textContent = editMode ? "✅ 完成编辑" : "✏️ 编辑价目表";
+  }
+
+  function buildShareText() {
+    var lines = [state.shopName, ""];
+    CATEGORIES.forEach(function (cat) {
+      var items = state.items.filter(function (it) { return it.category === cat; });
+      if (items.length === 0) return;
+      lines.push("【" + cat + "】");
+      items.forEach(function (it) {
+        lines.push(it.name + "  ¥" + it.price.toFixed(2) + (it.signature ? "  🌟招牌" : ""));
+      });
+      lines.push("");
+    });
+    return lines.join("\n");
+  }
+
+  function wireEvents() {
+    var toggleEditBtn = document.getElementById("toggleEditBtn");
+    if (toggleEditBtn) {
+      toggleEditBtn.addEventListener("click", function () {
+        editMode = !editMode;
+        render();
+      });
+    }
+
+    var shopNameInput = document.getElementById("shopNameInput");
+    if (shopNameInput) {
+      shopNameInput.addEventListener("change", function () {
+        state.shopName = shopNameInput.value.trim() || "我的奶茶铺";
+        save();
+        render();
+      });
+    }
+
+    var bgFileInput = document.getElementById("bgFileInput");
+    if (bgFileInput) {
+      bgFileInput.addEventListener("change", function () {
+        var file = bgFileInput.files && bgFileInput.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          state.bgImage = (e.target && typeof e.target.result === "string") ? e.target.result : "";
+          save();
+          applyBackground();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    var removeBgBtn = document.getElementById("removeBgBtn");
+    if (removeBgBtn) {
+      removeBgBtn.addEventListener("click", function () {
+        state.bgImage = "";
+        save();
+        applyBackground();
+      });
+    }
+
+    var addItemForm = document.getElementById("addItemForm");
+    if (addItemForm) {
+      addItemForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var nameEl = document.getElementById("newName");
+        var catEl = document.getElementById("newCategory");
+        var priceEl = document.getElementById("newPrice");
+        var descEl = document.getElementById("newDesc");
+        var sigEl = document.getElementById("newSignature");
+        if (!nameEl || !catEl || !priceEl || !descEl || !sigEl) return;
+
+        var name = nameEl.value.trim();
+        if (!name) return;
+        var price = parseFloat(priceEl.value);
+        if (!isFinite(price) || price < 0) price = 0;
+
+        state.items.push({
+          id: genId(),
+          name: name,
+          category: catEl.value,
+          price: price,
+          desc: descEl.value.trim(),
+          signature: !!sigEl.checked
+        });
+        save();
+        addItemForm.reset();
+        render();
+      });
+    }
+
+    var copyTextBtn = document.getElementById("copyTextBtn");
+    if (copyTextBtn) {
+      copyTextBtn.addEventListener("click", function () {
+        var statusEl = document.getElementById("copyStatus");
+        var text = buildShareText();
+
+        function showStatus(msg) {
+          if (statusEl) {
+            statusEl.textContent = msg;
+            setTimeout(function () { statusEl.textContent = ""; }, 2500);
+          }
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            showStatus("已复制到剪贴板 ✓");
+          }).catch(function () {
+            fallbackCopy(text, showStatus);
+          });
+        } else {
+          fallbackCopy(text, showStatus);
+        }
+      });
+    }
+  }
+
+  function fallbackCopy(text, showStatus) {
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      showStatus(ok ? "已复制到剪贴板 ✓" : "复制失败，请手动选择文字");
+    } catch (e) {
+      showStatus("当前环境不支持自动复制");
+    }
+  }
+
+  applyBackground();
+  render();
+  wireEvents();
+})();
+</script>
+</body>
+</html>

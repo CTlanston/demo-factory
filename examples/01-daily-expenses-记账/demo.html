@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>每天花了多少钱 · 拍照记账</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #FFF8F0;
+    color: #3A2E27;
+    -webkit-font-smoothing: antialiased;
+  }
+  .app {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  header h1 {
+    font-size: 22px;
+    margin: 0 0 4px;
+  }
+  header p {
+    margin: 0;
+    color: #9C8578;
+    font-size: 14px;
+  }
+  .card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 4px 14px rgba(180, 130, 90, 0.12);
+    margin-bottom: 16px;
+  }
+  .summary-card .month-label {
+    font-size: 14px;
+    color: #B08968;
+    margin-bottom: 4px;
+  }
+  .summary-card .total-amount {
+    font-size: 36px;
+    font-weight: 700;
+    color: #E4622A;
+    margin: 0 0 14px;
+  }
+  .cat-row {
+    display: grid;
+    grid-template-columns: 64px 1fr 70px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .cat-row.cat-top .cat-label {
+    font-weight: 700;
+    color: #E4622A;
+  }
+  .cat-bar-wrap {
+    background: #F3E7DC;
+    border-radius: 8px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .cat-bar {
+    background: linear-gradient(90deg, #FFB27A, #E4622A);
+    height: 100%;
+    border-radius: 8px;
+  }
+  .cat-amt {
+    text-align: right;
+    color: #6B554A;
+  }
+  .empty-tip {
+    color: #B0998A;
+    font-size: 14px;
+    text-align: center;
+    margin: 8px 0;
+  }
+  .add-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #FF9857, #E4622A);
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(228, 98, 42, 0.35);
+    cursor: pointer;
+  }
+  .add-btn:active {
+    transform: scale(0.98);
+  }
+  .recognize-panel.hidden {
+    display: none;
+  }
+  .recognize-panel {
+    margin-top: 14px;
+  }
+  .recognize-card {
+    background: #FFFDF9;
+    border: 1px solid #F1E2D3;
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+  }
+  .receipt-thumb {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    object-fit: cover;
+  }
+  .recognizing-text {
+    color: #B08968;
+    font-size: 15px;
+  }
+  .recognize-result {
+    font-size: 15px;
+    font-weight: 700;
+    color: #3A2E27;
+    margin: 6px 0 12px;
+    text-align: left;
+  }
+  .field-label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    color: #8A7364;
+    margin-bottom: 10px;
+  }
+  .field-label input,
+  .field-label select {
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #E7D5C4;
+    border-radius: 10px;
+    background: #fff;
+    color: #3A2E27;
+  }
+  .recognize-tip {
+    font-size: 12px;
+    color: #B0998A;
+    text-align: left;
+    margin: 0 0 12px;
+  }
+  .recognize-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .recognize-actions button {
+    flex: 1;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  #confirmSaveBtn {
+    background: #E4622A;
+    color: #fff;
+    font-weight: 700;
+  }
+  .secondary-btn {
+    background: #F3E7DC;
+    color: #6B554A;
+  }
+  .list-section h2 {
+    font-size: 16px;
+    margin: 4px 0 10px;
+    color: #6B554A;
+  }
+  .entry-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(180, 130, 90, 0.08);
+  }
+  .entry-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  .entry-date {
+    color: #8A7364;
+  }
+  .today-badge {
+    display: inline-block;
+    background: #E4622A;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 8px;
+    margin-right: 6px;
+  }
+  .entry-amt {
+    font-size: 17px;
+    font-weight: 700;
+    color: #E4622A;
+  }
+  .entry-bottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #6B554A;
+  }
+  .entry-photo-tag {
+    background: #F3E7DC;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #9C8578;
+  }
+  .entry-note {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #B0998A;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>💰 每天花了多少钱</h1>
+    <p>拍张小票，自动记一笔</p>
+  </header>
+
+  <section class="card summary-card">
+    <div class="month-label" id="monthLabel">本月支出</div>
+    <div class="total-amount" id="monthTotal">¥0.00</div>
+    <div id="categoryList"></div>
+  </section>
+
+  <section class="card add-section">
+    <button type="button" class="add-btn" id="addPhotoBtn">📷 拍照记一笔</button>
+    <input type="file" accept="image/*" capture="environment" id="photoInput" style="display:none">
+    <div class="recognize-panel hidden" id="recognizePanel"></div>
+  </section>
+
+  <section class="list-section">
+    <h2>明细</h2>
+    <div id="entryList"></div>
+  </section>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'demofactory:photo-expense-tracker:v1';
+  var CATEGORIES = ['吃饭', '交通', '买菜', '其他'];
+
+  function formatDate(d) {
+    var y = d.getFullYear();
+    var m = String(d.getMonth() + 1).padStart(2, '0');
+    var day = String(d.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + day;
+  }
+  function todayStr() { return formatDate(new Date()); }
+  function currentMonthPrefix() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+  }
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function categoryEmoji(cat) {
+    if (cat === '吃饭') return '🍚';
+    if (cat === '交通') return '🚌';
+    if (cat === '买菜') return '🥬';
+    return '💰';
+  }
+
+  function seedData() {
+    var today = new Date();
+    var d0 = formatDate(today);
+    var d1 = formatDate(new Date(today.getTime() - 86400000));
+    var d2 = formatDate(new Date(today.getTime() - 2 * 86400000));
+    return [
+      { id: 1, date: d0, amount: 32, category: '吃饭', note: '楼下面馆午饭', photo: true },
+      { id: 2, date: d1, amount: 15, category: '交通', note: '公交车费', photo: true },
+      { id: 3, date: d2, amount: 68, category: '买菜', note: '菜市场买菜', photo: true }
+    ];
+  }
+
+  function loadEntries() {
+    var raw;
+    try {
+      raw = localStorage.getItem(STORAGE_KEY);
+    } catch (err) {
+      return seedData();
+    }
+    if (!raw) return seedData();
+    var parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (err) {
+      return seedData();
+    }
+    if (!Array.isArray(parsed) || parsed.length === 0) return seedData();
+    var valid = parsed.filter(function (e) {
+      return e && typeof e === 'object' && typeof e.date === 'string' && !isNaN(Number(e.amount));
+    });
+    if (valid.length === 0) return seedData();
+    return valid.map(function (e) {
+      return {
+        id: e.id || (Date.now() + Math.random()),
+        date: e.date,
+        amount: Number(e.amount) || 0,
+        category: (typeof e.category === 'string' && e.category) ? e.category : '其他',
+        note: e.note || '',
+        photo: !!e.photo
+      };
+    });
+  }
+
+  function saveEntries(list) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    } catch (err) { /* storage unavailable, ignore */ }
+  }
+
+  var entries = loadEntries();
+
+  var monthLabelEl = document.getElementById('monthLabel');
+  var totalEl = document.getElementById('monthTotal');
+  var categoryListEl = document.getElementById('categoryList');
+  var entryListEl = document.getElementById('entryList');
+  var addPhotoBtn = document.getElementById('addPhotoBtn');
+  var photoInput = document.getElementById('photoInput');
+  var recognizePanel = document.getElementById('recognizePanel');
+
+  function renderSummary() {
+    if (monthLabelEl) {
+      monthLabelEl.textContent = (new Date().getMonth() + 1) + ' 月支出';
+    }
+    var prefix = currentMonthPrefix();
+    var monthEntries = entries.filter(function (e) { return e.date.indexOf(prefix) === 0; });
+    var total = monthEntries.reduce(function (s, e) { return s + (Number(e.amount) || 0); }, 0);
+    if (totalEl) totalEl.textContent = '¥' + total.toFixed(2);
+
+    var map = {};
+    monthEntries.forEach(function (e) {
+      var c = e.category || '其他';
+      map[c] = (map[c] || 0) + (Number(e.amount) || 0);
+    });
+    var sorted = Object.keys(map).map(function (k) { return [k, map[k]]; })
+      .sort(function (a, b) { return b[1] - a[1]; });
+
+    if (!categoryListEl) return;
+    if (sorted.length === 0) {
+      categoryListEl.innerHTML = '<p class="empty-tip">这个月还没有记录</p>';
+      return;
+    }
+    var max = sorted[0][1] || 1;
+    categoryListEl.innerHTML = sorted.map(function (pair, idx) {
+      var cat = pair[0], amt = pair[1];
+      var pct = Math.max(6, Math.round((amt / max) * 100));
+      return '<div class="cat-row' + (idx === 0 ? ' cat-top' : '') + '">' +
+        '<div class="cat-label">' + (idx === 0 ? '🔥 ' : categoryEmoji(cat) + ' ') + escapeHtml(cat) + '</div>' +
+        '<div class="cat-bar-wrap"><div class="cat-bar" style="width:' + pct + '%"></div></div>' +
+        '<div class="cat-amt">¥' + amt.toFixed(2) + '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function renderList() {
+    if (!entryListEl) return;
+    var sorted = entries.slice().sort(function (a, b) {
+      if (a.date !== b.date) return b.date.localeCompare(a.date);
+      return (b.id || 0) - (a.id || 0);
+    });
+    if (sorted.length === 0) {
+      entryListEl.innerHTML = '<p class="empty-tip">还没有记录，拍张照片试试吧</p>';
+      return;
+    }
+    var todayS = todayStr();
+    entryListEl.innerHTML = sorted.map(function (e) {
+      var isToday = e.date === todayS;
+      return '<div class="entry-card">' +
+        '<div class="entry-top">' +
+        '<span class="entry-date">' + (isToday ? '<span class="today-badge">今天</span>' : '') + escapeHtml(e.date) + '</span>' +
+        '<span class="entry-amt">¥' + (Number(e.amount) || 0).toFixed(2) + '</span>' +
+        '</div>' +
+        '<div class="entry-bottom">' +
+        '<span class="entry-cat">' + categoryEmoji(e.category) + ' ' + escapeHtml(e.category) + '</span>' +
+        (e.photo ? '<span class="entry-photo-tag">📷 小票</span>' : '') +
+        '</div>' +
+        (e.note ? '<div class="entry-note">' + escapeHtml(e.note) + '</div>' : '') +
+        '</div>';
+    }).join('');
+  }
+
+  function closeRecognizePanel() {
+    if (!recognizePanel) return;
+    recognizePanel.classList.add('hidden');
+    recognizePanel.innerHTML = '';
+    if (photoInput) photoInput.value = '';
+  }
+
+  function finishRecognizing(dataUrl) {
+    if (!recognizePanel) return;
+    var guessCat = CATEGORIES[Math.floor(Math.random() * 3)];
+    var guessAmt = (Math.random() * 60 + 8).toFixed(2);
+    recognizePanel.innerHTML =
+      '<div class="recognize-card">' +
+      '<img class="receipt-thumb" src="' + dataUrl + '" alt="小票照片">' +
+      '<p class="recognize-result">✅ 识别完成，请确认一下：</p>' +
+      '<label class="field-label">金额（¥）<input type="number" id="recAmount" value="' + guessAmt + '" min="0" step="0.01"></label>' +
+      '<label class="field-label">分类<select id="recCategory">' +
+      CATEGORIES.map(function (c) { return '<option value="' + c + '">' + categoryEmoji(c) + ' ' + c + '</option>'; }).join('') +
+      '</select></label>' +
+      '<p class="recognize-tip">如果识别得不准，改一下再保存就行</p>' +
+      '<div class="recognize-actions">' +
+      '<button type="button" id="confirmSaveBtn">保存</button>' +
+      '<button type="button" id="cancelRecBtn" class="secondary-btn">取消</button>' +
+      '</div></div>';
+
+    var recCategorySel = document.getElementById('recCategory');
+    if (recCategorySel) recCategorySel.value = guessCat;
+
+    var confirmBtn = document.getElementById('confirmSaveBtn');
+    var cancelBtn = document.getElementById('cancelRecBtn');
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', function () {
+        var amtInput = document.getElementById('recAmount');
+        var catSel = document.getElementById('recCategory');
+        var amt = amtInput ? Number(amtInput.value) : NaN;
+        var cat = catSel ? catSel.value : '其他';
+        if (isNaN(amt) || amt <= 0) {
+          alert('请输入正确的金额');
+          return;
+        }
+        entries.push({
+          id: Date.now(),
+          date: todayStr(),
+          amount: amt,
+          category: cat || '其他',
+          note: '拍照识别',
+          photo: true
+        });
+        saveEntries(entries);
+        renderSummary();
+        renderList();
+        closeRecognizePanel();
+      });
+    }
+    if (cancelBtn) cancelBtn.addEventListener('click', closeRecognizePanel);
+  }
+
+  function showRecognizing(dataUrl) {
+    if (!recognizePanel) return;
+    recognizePanel.classList.remove('hidden');
+    recognizePanel.innerHTML =
+      '<div class="recognize-card">' +
+      '<img class="receipt-thumb" src="' + dataUrl + '" alt="小票照片">' +
+      '<p class="recognizing-text">🔍 正在识别小票…</p>' +
+      '</div>';
+    setTimeout(function () { finishRecognizing(dataUrl); }, 900);
+  }
+
+  if (addPhotoBtn && photoInput) {
+    addPhotoBtn.addEventListener('click', function () { photoInput.click(); });
+    photoInput.addEventListener('change', function (ev) {
+      var file = ev.target.files && ev.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var dataUrl = e.target && e.target.result;
+        if (dataUrl) showRecognizing(dataUrl);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  renderSummary();
+  renderList();
+})();
+</script>
+</body>
+</html>

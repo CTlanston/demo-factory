@@ -1,0 +1,2501 @@
+[
+ {
+  "ts": "2026-07-10T02:05:34.175Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "1d09e656-e76f-48ef-905a-44d4077b993c",
+  "pass": false,
+  "criteria": {
+   "interview": false,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "interview HTTP 502: interview invalid: q1: does not end with a question mark; q2: does not end with a question mark; q3: does not end with a question mark; q4: does not end with a question mark; q5: does not end with a question mark; q6: does not end with a question mark"
+  ],
+  "duration_s": 28,
+  "cost_usd": 0.025056
+ },
+ {
+  "ts": "2026-07-10T02:08:26.363Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "958c5c4d-9276-429f-98d2-e9b820079934",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"log walk/meal\": text=false sel=true",
+   "demo probe \"today overview\": text=false sel=true"
+  ],
+  "duration_s": 172,
+  "cost_usd": 0.12455864999999999
+ },
+ {
+  "ts": "2026-07-10T02:16:49.667Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "84c27590-b046-47a3-a6d4-3ba99e0e097b",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "build HTTP 502: build: extract: no complete HTML document in engine output"
+  ],
+  "duration_s": 222,
+  "cost_usd": 0.18669064999999999
+ },
+ {
+  "ts": "2026-07-10T02:18:50.353Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "6814f638-7724-41a7-9ff1-055bf95cbd6a",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 121,
+  "cost_usd": 0.0870747
+ },
+ {
+  "ts": "2026-07-10T02:23:21.504Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "e4ff21d7-e51b-4580-9cab-d4b1e43a08e3",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"记录列表或汇总\": text=false sel=true"
+  ],
+  "duration_s": 168,
+  "cost_usd": 0.14679689999999998
+ },
+ {
+  "ts": "2026-07-10T02:25:36.376Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "3a005f3e-37eb-4164-9eed-388ec651360d",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 135,
+  "cost_usd": 0.11330255
+ },
+ {
+  "ts": "2026-07-10T02:30:04.125Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "78f52bfc-5aa9-4cb3-a3db-e7acd9fcdc1a",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 177,
+  "cost_usd": 0.14394210000000002
+ },
+ {
+  "ts": "2026-07-10T02:32:48.471Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "4f518851-8797-4182-a434-46a969ea0b7c",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 164,
+  "cost_usd": 0.1550237
+ },
+ {
+  "ts": "2026-07-10T07:24:17.424Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "b9552fea-f82b-4e04-b181-e2c586ca2210",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 175,
+  "cost_usd": 0.17037534999999998
+ },
+ {
+  "ts": "2026-07-10T07:26:20.356Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "f42e79c9-305a-4f6a-ae14-3354fb1d70dc",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 123,
+  "cost_usd": 0.08227045
+ },
+ {
+  "ts": "2026-07-10T07:28:06.470Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "e94ea1ef-22af-411f-aed6-ff6491cc43a0",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 106,
+  "cost_usd": 0.08477455
+ },
+ {
+  "ts": "2026-07-10T07:30:34.904Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "514d37b4-ee30-4010-96f9-d111a4ffe0a9",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 148,
+  "cost_usd": 0.119724
+ },
+ {
+  "ts": "2026-07-10T07:33:36.553Z",
+  "persona": "jz1",
+  "domain": "记账",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "9323a4d0-92fc-4b67-bc1b-fb06c207fc26",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 182,
+  "cost_usd": 0.09997465
+ },
+ {
+  "ts": "2026-07-10T07:36:41.492Z",
+  "persona": "jz2",
+  "domain": "记账",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "90de84c8-017c-4309-b697-eae746279bc1",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"total or list\": text=false sel=true"
+  ],
+  "duration_s": 185,
+  "cost_usd": 0.11388410000000002
+ },
+ {
+  "ts": "2026-07-10T07:39:06.471Z",
+  "persona": "jz2",
+  "domain": "记账",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "9899bcd7-7d55-4edf-867b-c95888f3ce55",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 145,
+  "cost_usd": 0.08729819999999999
+ },
+ {
+  "ts": "2026-07-10T07:41:36.929Z",
+  "persona": "jz2",
+  "domain": "记账",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "399e7df6-087b-431b-bca9-f3887f25a0ca",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 150,
+  "cost_usd": 0.0914645
+ },
+ {
+  "ts": "2026-07-10T07:43:44.880Z",
+  "persona": "jz2",
+  "domain": "记账",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "8a40a205-a526-4336-99f1-f479470ab21d",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 128,
+  "cost_usd": 0.1389791
+ },
+ {
+  "ts": "2026-07-10T07:47:06.889Z",
+  "persona": "jz2",
+  "domain": "记账",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "5cda7d10-b507-4561-b38a-fb80f4e87454",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"total or list\": text=false sel=true"
+  ],
+  "duration_s": 202,
+  "cost_usd": 0.12279285000000001
+ },
+ {
+  "ts": "2026-07-10T07:50:06.517Z",
+  "persona": "xc1",
+  "domain": "相册",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "d78bba49-4663-4525-9205-da24dcb8ef79",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 180,
+  "cost_usd": 0.11117485000000002
+ },
+ {
+  "ts": "2026-07-10T07:53:04.371Z",
+  "persona": "xc1",
+  "domain": "相册",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "602fd073-cb13-4227-b621-9bc3ec184786",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 178,
+  "cost_usd": 0.10951185
+ },
+ {
+  "ts": "2026-07-10T07:56:28.836Z",
+  "persona": "xc1",
+  "domain": "相册",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "819f18c5-0bc8-49b7-ac85-6d157c32a80d",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 204,
+  "cost_usd": 0.12296585000000002
+ },
+ {
+  "ts": "2026-07-10T07:58:51.252Z",
+  "persona": "xc1",
+  "domain": "相册",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "fe0bb6da-1b1d-416b-a21c-6c8270c51a26",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 142,
+  "cost_usd": 0.09314285
+ },
+ {
+  "ts": "2026-07-10T08:03:05.874Z",
+  "persona": "xc1",
+  "domain": "相册",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "736505fc-49bd-48a5-9363-02abdcaa88bb",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 255,
+  "cost_usd": 0.15464085000000002
+ },
+ {
+  "ts": "2026-07-10T08:06:30.921Z",
+  "persona": "xc2",
+  "domain": "相册",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "aab8444a-1985-4ed4-ba93-ce5cde70ea44",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"翻页浏览\": text=false sel=true"
+  ],
+  "duration_s": 205,
+  "cost_usd": 0.12328860000000001
+ },
+ {
+  "ts": "2026-07-10T08:09:14.516Z",
+  "persona": "xc2",
+  "domain": "相册",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "793805d7-7b23-446d-8b97-4aeb6e901934",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 164,
+  "cost_usd": 0.10885909999999999
+ },
+ {
+  "ts": "2026-07-10T08:12:07.470Z",
+  "persona": "xc2",
+  "domain": "相册",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "c379105d-83f2-4980-af5e-b1c41f7161d9",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"翻页浏览\": text=false sel=true"
+  ],
+  "duration_s": 173,
+  "cost_usd": 0.10894585000000001
+ },
+ {
+  "ts": "2026-07-10T08:14:37.989Z",
+  "persona": "xc2",
+  "domain": "相册",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "019ac448-9fad-4b77-ab30-c3be92baae84",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 151,
+  "cost_usd": 0.0917507
+ },
+ {
+  "ts": "2026-07-10T08:16:34.145Z",
+  "persona": "xc2",
+  "domain": "相册",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "579026a8-942f-47ed-97e2-2103c83de3bb",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 116,
+  "cost_usd": 0.06870185
+ },
+ {
+  "ts": "2026-07-10T08:20:48.294Z",
+  "persona": "bl1",
+  "domain": "报名接龙",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "a43f656c-5876-43ad-9cef-7301010cfc86",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 254,
+  "cost_usd": 0.14264385000000002
+ },
+ {
+  "ts": "2026-07-10T08:23:29.336Z",
+  "persona": "bl1",
+  "domain": "报名接龙",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "e1e95faf-8f48-4a6d-b768-e680cf05d8d5",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 161,
+  "cost_usd": 0.09930885
+ },
+ {
+  "ts": "2026-07-10T08:26:36.045Z",
+  "persona": "bl1",
+  "domain": "报名接龙",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "e605110f-25ec-4e6f-988c-eab39e7e16ff",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 187,
+  "cost_usd": 0.11810345
+ },
+ {
+  "ts": "2026-07-10T08:29:29.409Z",
+  "persona": "bl1",
+  "domain": "报名接龙",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "61fddbb2-ad33-4f1f-a9b7-40c58f4fc5a1",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 173,
+  "cost_usd": 0.10477185000000001
+ },
+ {
+  "ts": "2026-07-10T08:32:04.733Z",
+  "persona": "bl1",
+  "domain": "报名接龙",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "3967c43c-ba3f-4329-b400-db5c312b5fc4",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo console: TypeError: Cannot read properties of undefined (reading 'length')"
+  ],
+  "duration_s": 155,
+  "cost_usd": 0.0887809
+ },
+ {
+  "ts": "2026-07-10T08:34:25.909Z",
+  "persona": "bl2",
+  "domain": "报名接龙",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "3f3e7537-8220-4fb2-86af-4314a6225890",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 141,
+  "cost_usd": 0.0874676
+ },
+ {
+  "ts": "2026-07-10T08:37:03.201Z",
+  "persona": "bl2",
+  "domain": "报名接龙",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "36c68398-e88b-46dc-8bf4-3f90f3a1b4ed",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 157,
+  "cost_usd": 0.09381619999999999
+ },
+ {
+  "ts": "2026-07-10T08:37:21.983Z",
+  "persona": "bl2",
+  "domain": "报名接龙",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "caef81e3-576d-408d-812c-20c89c3137be",
+  "pass": false,
+  "criteria": {
+   "interview": false,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "interview HTTP 502: interview: parse: Expected ',' or '}' after property value in JSON at position 167"
+  ],
+  "duration_s": 19,
+  "cost_usd": 0.01323435
+ },
+ {
+  "ts": "2026-07-10T08:41:14.585Z",
+  "persona": "bl2",
+  "domain": "报名接龙",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "c719c164-2a43-4894-9e51-39e34ee1a210",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 233,
+  "cost_usd": 0.14135365000000003
+ },
+ {
+  "ts": "2026-07-10T08:44:15.750Z",
+  "persona": "bl2",
+  "domain": "报名接龙",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "b2a4f450-c221-4c76-92a8-5758b3575c9d",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 181,
+  "cost_usd": 0.14139095000000002
+ },
+ {
+  "ts": "2026-07-10T08:47:23.832Z",
+  "persona": "cp1",
+  "domain": "菜谱",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "2f361185-68d7-4383-b1a4-0581b9df006e",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 188,
+  "cost_usd": 0.1127653
+ },
+ {
+  "ts": "2026-07-10T08:50:24.139Z",
+  "persona": "cp1",
+  "domain": "菜谱",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "0c1484a9-d24a-4b9e-b78a-02739d2dfe10",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"菜名与步骤\": text=false sel=true"
+  ],
+  "duration_s": 180,
+  "cost_usd": 0.11630850000000001
+ },
+ {
+  "ts": "2026-07-10T08:53:47.788Z",
+  "persona": "cp1",
+  "domain": "菜谱",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "805d46b9-49de-4cc5-90cc-83815fe95e6e",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"菜名与步骤\": text=false sel=true"
+  ],
+  "duration_s": 204,
+  "cost_usd": 0.1266062
+ },
+ {
+  "ts": "2026-07-10T08:55:50.637Z",
+  "persona": "cp1",
+  "domain": "菜谱",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "3a349644-01fc-4f86-9c32-b57693655ddb",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 123,
+  "cost_usd": 0.10218695000000001
+ },
+ {
+  "ts": "2026-07-10T08:56:47.902Z",
+  "persona": "cp1",
+  "domain": "菜谱",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "29b92c54-67eb-45e5-9e2d-c6612d659412",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "options HTTP 502: options: parse: Expected ',' or ']' after array element in JSON at position 1172"
+  ],
+  "duration_s": 57,
+  "cost_usd": 0.03576845
+ },
+ {
+  "ts": "2026-07-10T09:00:01.789Z",
+  "persona": "cp2",
+  "domain": "菜谱",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "915ced5f-6d37-4d65-a951-579accc0f3f3",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 194,
+  "cost_usd": 0.11960509999999999
+ },
+ {
+  "ts": "2026-07-10T09:03:00.995Z",
+  "persona": "cp2",
+  "domain": "菜谱",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "29df1ab6-d6ef-43b8-aaa3-ea4681282cc5",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 179,
+  "cost_usd": 0.1153791
+ },
+ {
+  "ts": "2026-07-10T09:05:59.690Z",
+  "persona": "cp2",
+  "domain": "菜谱",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "db454f0f-67a5-4ee3-b426-2cc6f7222197",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 179,
+  "cost_usd": 0.10752270000000001
+ },
+ {
+  "ts": "2026-07-10T09:06:45.261Z",
+  "persona": "cp2",
+  "domain": "菜谱",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "61454692-0985-440a-9d68-5f45ccb599a3",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "options HTTP 502: options: invalid: options 1&2 too similar (0.61)"
+  ],
+  "duration_s": 46,
+  "cost_usd": 0.025688899999999997
+ },
+ {
+  "ts": "2026-07-10T09:08:42.369Z",
+  "persona": "cp2",
+  "domain": "菜谱",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "a0d7e176-b47f-41d1-af23-3189c9fce398",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 117,
+  "cost_usd": 0.07153199999999998
+ },
+ {
+  "ts": "2026-07-10T09:11:30.161Z",
+  "persona": "js1",
+  "domain": "健身打卡",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "19bb6d42-8f20-40f1-b7a2-423963f79b3f",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 168,
+  "cost_usd": 0.10653004999999999
+ },
+ {
+  "ts": "2026-07-10T09:15:10.562Z",
+  "persona": "js1",
+  "domain": "健身打卡",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "2b449510-d102-4cf6-9d1f-1c68bccb77bb",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 220,
+  "cost_usd": 0.14162175
+ },
+ {
+  "ts": "2026-07-10T09:19:01.834Z",
+  "persona": "js1",
+  "domain": "健身打卡",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "adabc7ce-d3a1-473f-a8d5-c2052c10ae3a",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 231,
+  "cost_usd": 0.12273735000000001
+ },
+ {
+  "ts": "2026-07-10T09:22:12.060Z",
+  "persona": "js1",
+  "domain": "健身打卡",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "132dc611-d7ee-4029-9ccd-21a5faab2d79",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 190,
+  "cost_usd": 0.1074387
+ },
+ {
+  "ts": "2026-07-10T09:26:20.547Z",
+  "persona": "js1",
+  "domain": "健身打卡",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "fba7da42-c456-403c-b3bd-2ddca753599e",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 248,
+  "cost_usd": 0.13803474999999998
+ },
+ {
+  "ts": "2026-07-10T09:27:05.566Z",
+  "persona": "js2",
+  "domain": "健身打卡",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "b8a320b4-085d-41dd-a73e-ae4457e6f274",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "options HTTP 502: options: parse: Expected ',' or ']' after array element in JSON at position 265"
+  ],
+  "duration_s": 45,
+  "cost_usd": 0.026708449999999998
+ },
+ {
+  "ts": "2026-07-10T09:29:09.792Z",
+  "persona": "js2",
+  "domain": "健身打卡",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "05393d76-5ac5-4016-a0fa-7705d955f9e3",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 124,
+  "cost_usd": 0.06942435
+ },
+ {
+  "ts": "2026-07-10T09:32:23.587Z",
+  "persona": "js2",
+  "domain": "健身打卡",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "cb3aeb4e-2742-4a8f-ad32-30b0bd13a910",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 194,
+  "cost_usd": 0.10679269999999999
+ },
+ {
+  "ts": "2026-07-10T09:35:35.824Z",
+  "persona": "js2",
+  "domain": "健身打卡",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "49d324a4-e7f6-4aab-91eb-440921141598",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 192,
+  "cost_usd": 0.10498835000000001
+ },
+ {
+  "ts": "2026-07-10T09:38:40.992Z",
+  "persona": "js2",
+  "domain": "健身打卡",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "7470adb4-630e-438e-bb5b-8f197b743339",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo console: TypeError: Cannot read properties of undefined (reading 'find')"
+  ],
+  "duration_s": 185,
+  "cost_usd": 0.10313694999999999
+ },
+ {
+  "ts": "2026-07-10T09:42:09.565Z",
+  "persona": "xd1",
+  "domain": "小店价目表",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "41c51854-1107-4fe4-b76b-e31190060e22",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 209,
+  "cost_usd": 0.15313695000000002
+ },
+ {
+  "ts": "2026-07-10T09:45:00.557Z",
+  "persona": "xd1",
+  "domain": "小店价目表",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "71ca1719-0fd9-448d-bf71-4490397dd54d",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 171,
+  "cost_usd": 0.10323520000000001
+ },
+ {
+  "ts": "2026-07-10T09:47:43.092Z",
+  "persona": "xd1",
+  "domain": "小店价目表",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "a3f85be5-1d96-4c33-afdc-c99705b53f24",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 163,
+  "cost_usd": 0.09524945000000001
+ },
+ {
+  "ts": "2026-07-10T09:50:25.514Z",
+  "persona": "xd1",
+  "domain": "小店价目表",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "9f528eee-a11a-4fa5-8375-0742caaba0b6",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 162,
+  "cost_usd": 0.0958644
+ },
+ {
+  "ts": "2026-07-10T09:53:41.242Z",
+  "persona": "xd1",
+  "domain": "小店价目表",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "7b4de2f5-0651-468a-b5c1-46289e810bf8",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 196,
+  "cost_usd": 0.10344840000000001
+ },
+ {
+  "ts": "2026-07-10T09:56:15.228Z",
+  "persona": "xd2",
+  "domain": "小店价目表",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "38dc0b72-6f85-4915-be73-8d3475c45065",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 154,
+  "cost_usd": 0.10109885
+ },
+ {
+  "ts": "2026-07-10T09:59:22.511Z",
+  "persona": "xd2",
+  "domain": "小店价目表",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "7b785436-ac42-49df-a98b-42d2cfdbe376",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 187,
+  "cost_usd": 0.11717269999999999
+ },
+ {
+  "ts": "2026-07-10T10:02:33.541Z",
+  "persona": "xd2",
+  "domain": "小店价目表",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "21396644-c2b8-4cf6-9e7b-70a3b45a5066",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 191,
+  "cost_usd": 0.1016172
+ },
+ {
+  "ts": "2026-07-10T10:06:21.110Z",
+  "persona": "xd2",
+  "domain": "小店价目表",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "df5bea3c-f1d9-48c6-8037-4e60d81a2145",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 228,
+  "cost_usd": 0.12378655
+ },
+ {
+  "ts": "2026-07-10T10:09:14.044Z",
+  "persona": "xd2",
+  "domain": "小店价目表",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "f033000e-3b5f-4a73-8f7c-5c396acd71cf",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 173,
+  "cost_usd": 0.09644620000000001
+ },
+ {
+  "ts": "2026-07-10T10:12:15.955Z",
+  "persona": "bj1",
+  "domain": "班级通知",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "d2a2ed87-2e1d-48ab-b663-013bab2beadc",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"置顶或新标记\": text=false sel=true"
+  ],
+  "duration_s": 182,
+  "cost_usd": 0.1071751
+ },
+ {
+  "ts": "2026-07-10T10:15:17.602Z",
+  "persona": "bj1",
+  "domain": "班级通知",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "98b8ef43-4015-4835-bb02-6b201bc3247a",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 182,
+  "cost_usd": 0.10792265000000001
+ },
+ {
+  "ts": "2026-07-10T10:16:59.379Z",
+  "persona": "bj1",
+  "domain": "班级通知",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "cbcaaf03-25dd-482a-97d7-0cefbe9a6122",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "options HTTP 502: options: parse: Expected ',' or '}' after property value in JSON at position 548"
+  ],
+  "duration_s": 102,
+  "cost_usd": 0.05982010000000001
+ },
+ {
+  "ts": "2026-07-10T10:20:04.205Z",
+  "persona": "bj1",
+  "domain": "班级通知",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "72c2360a-66da-423c-b558-ee059e6c8b72",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 185,
+  "cost_usd": 0.1111629
+ },
+ {
+  "ts": "2026-07-10T10:20:28.689Z",
+  "persona": "bj1",
+  "domain": "班级通知",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "2ec09177-ac6f-4014-b703-c90be7443d88",
+  "pass": false,
+  "criteria": {
+   "interview": false,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "interview HTTP 502: interview: invalid: q2: does not end with a question mark"
+  ],
+  "duration_s": 24,
+  "cost_usd": 0.014122349999999999
+ },
+ {
+  "ts": "2026-07-10T10:23:34.205Z",
+  "persona": "bj2",
+  "domain": "班级通知",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "888f31bd-8192-4679-b701-5d64c0b299f2",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 186,
+  "cost_usd": 0.121218
+ },
+ {
+  "ts": "2026-07-10T10:26:22.672Z",
+  "persona": "bj2",
+  "domain": "班级通知",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "2a173bd8-b880-404e-9696-820a5911e756",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"今天是谁\": text=false sel=true"
+  ],
+  "duration_s": 168,
+  "cost_usd": 0.10258745
+ },
+ {
+  "ts": "2026-07-10T10:29:17.577Z",
+  "persona": "bj2",
+  "domain": "班级通知",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "bfc8be81-3db7-4ed6-9710-baf0caba8dc7",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 175,
+  "cost_usd": 0.1077606
+ },
+ {
+  "ts": "2026-07-10T10:33:26.299Z",
+  "persona": "bj2",
+  "domain": "班级通知",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "441bbf49-a911-49e4-830c-b06bf1837204",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"今天是谁\": text=false sel=true"
+  ],
+  "duration_s": 249,
+  "cost_usd": 0.1311721
+ },
+ {
+  "ts": "2026-07-10T10:36:37.861Z",
+  "persona": "bj2",
+  "domain": "班级通知",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "9d50d4a5-7a72-4202-af79-cc3b4ff65ea7",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"今天是谁\": text=false sel=true"
+  ],
+  "duration_s": 192,
+  "cost_usd": 0.120922
+ },
+ {
+  "ts": "2026-07-10T10:39:52.767Z",
+  "persona": "cw1",
+  "domain": "宠物记录",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "780f5d5a-b0b5-480f-90cc-d3ca8555d7a1",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 195,
+  "cost_usd": 0.12545635
+ },
+ {
+  "ts": "2026-07-10T10:42:03.756Z",
+  "persona": "cw1",
+  "domain": "宠物记录",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "38c78196-15d2-41b9-ae87-d07f2a21cae7",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 131,
+  "cost_usd": 0.08577615
+ },
+ {
+  "ts": "2026-07-10T10:45:08.540Z",
+  "persona": "cw1",
+  "domain": "宠物记录",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "e59d93d6-2431-496f-85f1-5e9ab30dc096",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 185,
+  "cost_usd": 0.11874019999999999
+ },
+ {
+  "ts": "2026-07-10T10:47:10.000Z",
+  "persona": "cw1",
+  "domain": "宠物记录",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "f7bfc760-535b-481e-a894-554a905fcdd6",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 121,
+  "cost_usd": 0.10423085000000001
+ },
+ {
+  "ts": "2026-07-10T10:50:31.568Z",
+  "persona": "cw1",
+  "domain": "宠物记录",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "5726376a-6bb7-41ca-af5c-9cfbf479810a",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 202,
+  "cost_usd": 0.17009385
+ },
+ {
+  "ts": "2026-07-10T10:53:02.809Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "3fdb6101-96c4-4712-8474-11846c8887f5",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 151,
+  "cost_usd": 0.0941101
+ },
+ {
+  "ts": "2026-07-10T10:55:28.809Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "01fc01a7-df47-4714-8ede-a4a7f5e5e3f9",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 146,
+  "cost_usd": 0.09381300000000001
+ },
+ {
+  "ts": "2026-07-10T10:58:13.764Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "8806e94a-f565-495b-880e-f94a3af57030",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 165,
+  "cost_usd": 0.1052409
+ },
+ {
+  "ts": "2026-07-10T10:58:51.922Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "1d321185-ce70-4497-9f01-ba6cf9c8c97a",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "options HTTP 502: options: invalid: options 1&3 too similar (0.56)"
+  ],
+  "duration_s": 38,
+  "cost_usd": 0.0271155
+ },
+ {
+  "ts": "2026-07-10T11:00:04.995Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "d5c158b8-3aa6-4e42-81c0-904655b3e389",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "options HTTP 502: options: invalid: options 1&2 too similar (0.55); options 1&3 too similar (0.56)"
+  ],
+  "duration_s": 73,
+  "cost_usd": 0.04130175
+ },
+ {
+  "ts": "2026-07-10T11:03:13.571Z",
+  "persona": "ds1",
+  "domain": "读书笔记",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "302fcb4c-9121-468a-84f7-1d1f754c9c4e",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 189,
+  "cost_usd": 0.11650935000000001
+ },
+ {
+  "ts": "2026-07-10T11:07:08.995Z",
+  "persona": "ds1",
+  "domain": "读书笔记",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "df9a101a-b545-468f-b08f-2f7e0e58a5e4",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 235,
+  "cost_usd": 0.1399506
+ },
+ {
+  "ts": "2026-07-10T11:07:41.842Z",
+  "persona": "ds1",
+  "domain": "读书笔记",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "b784d596-d5ee-4bb1-bc2f-56f7b3c7842d",
+  "pass": false,
+  "criteria": {
+   "interview": false,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "interview HTTP 502: interview: parse: Expected ',' or '}' after property value in JSON at position 872"
+  ],
+  "duration_s": 33,
+  "cost_usd": 0.0191041
+ },
+ {
+  "ts": "2026-07-10T11:10:42.280Z",
+  "persona": "ds1",
+  "domain": "读书笔记",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "bc8a162f-7e22-4037-9cbf-ad1af54ed53b",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo console: TypeError: Cannot read properties of undefined (reading 'replace')\nescapeHtml (file:///var/folders/v9/_qhw5dj16gx4mpm8yp_pj5mr0000gn/T/df-demo-UDhRFL/demo.html:365:25)"
+  ],
+  "duration_s": 180,
+  "cost_usd": 0.11217175000000001
+ },
+ {
+  "ts": "2026-07-10T11:13:16.492Z",
+  "persona": "ds1",
+  "domain": "读书笔记",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "72aeeb8c-1703-4889-9caa-0641172b436f",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 154,
+  "cost_usd": 0.09720695
+ },
+ {
+  "ts": "2026-07-10T11:15:18.046Z",
+  "persona": "ds2",
+  "domain": "读书笔记",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "dd37a31e-db11-4b2a-9e9f-bd721e533a19",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 122,
+  "cost_usd": 0.08200550000000001
+ },
+ {
+  "ts": "2026-07-10T11:18:01.735Z",
+  "persona": "ds2",
+  "domain": "读书笔记",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "a85a0e8f-9727-45f1-9cd6-181fdec3e08f",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"总数或喜爱标记\": text=false sel=true"
+  ],
+  "duration_s": 164,
+  "cost_usd": 0.10381835
+ },
+ {
+  "ts": "2026-07-10T11:20:44.634Z",
+  "persona": "ds2",
+  "domain": "读书笔记",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "0aa6d9c8-7214-4638-8d5c-5fd9277694cc",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 163,
+  "cost_usd": 0.10186095000000002
+ },
+ {
+  "ts": "2026-07-10T11:22:55.041Z",
+  "persona": "ds2",
+  "domain": "读书笔记",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "fab3a2bd-c417-485a-8ffa-5dfb42394bca",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 130,
+  "cost_usd": 0.08256385
+ },
+ {
+  "ts": "2026-07-10T11:25:28.442Z",
+  "persona": "ds2",
+  "domain": "读书笔记",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "1d817737-b00f-49b5-a5d4-f33a0108950d",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 153,
+  "cost_usd": 0.10097610000000001
+ },
+ {
+  "ts": "2026-07-10T11:28:14.394Z",
+  "persona": "sr1",
+  "domain": "生日提醒",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "13ddd929-c3f4-4ce0-8761-0152d8e178b2",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 166,
+  "cost_usd": 0.0985703
+ },
+ {
+  "ts": "2026-07-10T11:32:24.197Z",
+  "persona": "sr1",
+  "domain": "生日提醒",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "e2bbf6b8-f6d5-4c22-8554-1b8b96c80c2e",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 250,
+  "cost_usd": 0.14769595
+ },
+ {
+  "ts": "2026-07-10T11:35:29.908Z",
+  "persona": "sr1",
+  "domain": "生日提醒",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "4fdc3d00-baea-470f-badd-3f7f229a756f",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 186,
+  "cost_usd": 0.1061396
+ },
+ {
+  "ts": "2026-07-10T11:38:49.065Z",
+  "persona": "sr1",
+  "domain": "生日提醒",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "89b673c8-cd4c-430f-b770-fddf0b2730cc",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 199,
+  "cost_usd": 0.11907145
+ },
+ {
+  "ts": "2026-07-10T11:41:56.328Z",
+  "persona": "sr1",
+  "domain": "生日提醒",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "3b210819-2a01-486f-9e77-4e97040ed3b9",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 187,
+  "cost_usd": 0.110514
+ },
+ {
+  "ts": "2026-07-10T11:44:20.241Z",
+  "persona": "sr2",
+  "domain": "生日提醒",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "62452763-0456-42b4-a599-0041afd0eb0b",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo console: TypeError: Cannot read properties of undefined (reading 'split')\ngetDaysUntilBirthday (file:///var/folders/v9/_qhw5dj16gx4mpm8yp_pj5mr0000gn/T/df-demo-k4fkqo/demo.html:428:51)"
+  ],
+  "duration_s": 144,
+  "cost_usd": 0.09524460000000001
+ },
+ {
+  "ts": "2026-07-10T11:46:36.720Z",
+  "persona": "sr2",
+  "domain": "生日提醒",
+  "seed": 1,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "47020051-46fd-4c3a-8e88-5edbb6ad80b6",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo console: TypeError: Cannot read properties of undefined (reading 'split')\ngetDaysUntil (file:///var/folders/v9/_qhw5dj16gx4mpm8yp_pj5mr0000gn/T/df-demo-kR9GYo/demo.html:321:42)"
+  ],
+  "duration_s": 136,
+  "cost_usd": 0.08802345
+ },
+ {
+  "ts": "2026-07-10T11:49:16.130Z",
+  "persona": "sr2",
+  "domain": "生日提醒",
+  "seed": 2,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "41a6cbe8-62c5-4e42-a726-5f8c9b9911b8",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 159,
+  "cost_usd": 0.09739345
+ },
+ {
+  "ts": "2026-07-10T11:51:28.694Z",
+  "persona": "sr2",
+  "domain": "生日提醒",
+  "seed": 3,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "fa2c6e65-d918-4b91-b277-aec2b49f930f",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 133,
+  "cost_usd": 0.08418395000000001
+ },
+ {
+  "ts": "2026-07-10T11:54:06.833Z",
+  "persona": "sr2",
+  "domain": "生日提醒",
+  "seed": 4,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "b5f6ddbb-c367-4c9c-9216-9cb498c94409",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 158,
+  "cost_usd": 0.09514965
+ },
+ {
+  "ts": "2026-07-10T12:24:44.164Z",
+  "persona": "cw2",
+  "domain": "宠物记录",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "02740c83-ee0f-48c8-b516-2ee1ee514df6",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 224,
+  "cost_usd": 0.15008490000000002
+ },
+ {
+  "ts": "2026-07-10T12:28:23.548Z",
+  "persona": "sr2",
+  "domain": "生日提醒",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "032e00f9-d1a1-4e81-93f1-5c4b5d671cb5",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 219,
+  "cost_usd": 0.13662459999999998
+ },
+ {
+  "ts": "2026-07-10T12:32:30.787Z",
+  "persona": "bj2",
+  "domain": "班级通知",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "dda049e1-3ae9-4f46-9378-30fe75531541",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 247,
+  "cost_usd": 0.15050445
+ },
+ {
+  "ts": "2026-07-10T12:35:58.639Z",
+  "persona": "xc2",
+  "domain": "相册",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "3879a588-8c68-4a68-b598-283a1f05d324",
+  "pass": true,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 208,
+  "cost_usd": 0.1353013
+ },
+ {
+  "ts": "2026-07-10T12:38:04.791Z",
+  "persona": "cp2",
+  "domain": "菜谱",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "ebe75891-9df7-4900-a4ca-4a389d54e4e5",
+  "pass": false,
+  "criteria": {
+   "interview": true,
+   "options": false,
+   "demo": false,
+   "zip": false,
+   "duration": true
+  },
+  "failures": [
+   "options HTTP 502: options: invalid: options 1&3 too similar (0.55)"
+  ],
+  "duration_s": 126,
+  "cost_usd": 0.07374265
+ },
+ {
+  "ts": "2026-07-10T17:57:40.258Z",
+  "persona": "xc1",
+  "domain": "相册",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "0d8b9d29-4e40-4a1e-8dce-37154670b408",
+  "pass": true,
+  "infra_error": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 204,
+  "cost_usd": 0.13043679999999996,
+  "attempts": 1
+ },
+ {
+  "ts": "2026-07-10T18:01:53.927Z",
+  "persona": "xc2",
+  "domain": "相册",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "413bdc5f-25ad-4e3b-8f27-5f5decb47b71",
+  "pass": true,
+  "infra_error": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 254,
+  "cost_usd": 0.2103301,
+  "attempts": 1
+ },
+ {
+  "ts": "2026-07-10T18:08:11.002Z",
+  "persona": "xd1",
+  "domain": "小店价目表",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "23ee434f-76ab-4929-91b9-65505ac4c5ab",
+  "pass": true,
+  "infra_error": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 377,
+  "cost_usd": 0.1317972,
+  "attempts": 1
+ },
+ {
+  "ts": "2026-07-10T18:14:00.242Z",
+  "persona": "xd2",
+  "domain": "小店价目表",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "a22c447f-abaa-4c53-b246-f7b59263217a",
+  "pass": true,
+  "infra_error": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 349,
+  "cost_usd": 0.1164533,
+  "attempts": 1
+ },
+ {
+  "ts": "2026-07-10T18:18:12.122Z",
+  "persona": "bj1",
+  "domain": "班级通知",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "3c4e18b1-bbfe-4a0c-91e7-a8643218a31d",
+  "pass": true,
+  "infra_error": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 252,
+  "cost_usd": 0.17889535,
+  "attempts": 1
+ },
+ {
+  "ts": "2026-07-10T18:21:22.413Z",
+  "persona": "bj2",
+  "domain": "班级通知",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "543ba51b-e2b1-4001-af04-f363c126fba8",
+  "pass": true,
+  "infra_error": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 190,
+  "cost_usd": 0.11813770000000001,
+  "attempts": 1
+ },
+ {
+  "ts": "2026-07-10T18:24:51.882Z",
+  "persona": "cp1",
+  "domain": "菜谱",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "c64920fb-1a72-4dc0-afec-3388571d4e2b",
+  "pass": false,
+  "infra_error": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": false,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [
+   "demo probe \"菜名与步骤\": text=false sel=true"
+  ],
+  "duration_s": 209,
+  "cost_usd": 0.15350585,
+  "attempts": 1
+ },
+ {
+  "ts": "2026-07-10T18:28:58.557Z",
+  "persona": "js2",
+  "domain": "健身打卡",
+  "seed": 0,
+  "model": "claude-haiku-4-5-20251001",
+  "engine": "real",
+  "session": "aa83005f-5985-4dd6-b241-bdc32302d7be",
+  "pass": true,
+  "infra_error": false,
+  "criteria": {
+   "interview": true,
+   "options": true,
+   "demo": true,
+   "zip": true,
+   "duration": true
+  },
+  "failures": [],
+  "duration_s": 247,
+  "cost_usd": 0.1459406,
+  "attempts": 1
+ }
+]

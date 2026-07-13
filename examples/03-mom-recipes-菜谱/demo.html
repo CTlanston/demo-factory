@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>妈妈的拿手菜 · 家庭菜谱本</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #fff8f0;
+    color: #4a3728;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 16px 16px 60px; }
+  header { text-align: center; padding: 20px 0 10px; }
+  header h1 { margin: 0; font-size: 26px; }
+  header p { margin: 6px 0 0; color: #8a7565; font-size: 15px; }
+  .summary { text-align: center; color: #c96f26; font-size: 15px; margin-bottom: 14px; font-weight: bold; }
+
+  .card {
+    background: #fff;
+    border: 1px solid #f0ddc8;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(200,150,90,0.08);
+  }
+  .card h2 { margin: 0 0 12px; font-size: 18px; }
+
+  label { display: block; font-size: 14px; color: #8a7565; margin: 12px 0 6px; }
+  input[type="text"], select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #e6d3ba;
+    border-radius: 10px;
+    background: #fffaf3;
+    color: #4a3728;
+    font-family: inherit;
+  }
+  textarea { min-height: 70px; resize: vertical; }
+
+  button {
+    font-family: inherit;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+  }
+  .btn-primary { background: #e08b3d; color: #fff; font-weight: bold; }
+  .btn-primary:active { background: #c96f26; }
+  .btn-secondary { background: #f3e5d3; color: #6b4f37; }
+  .btn-secondary:active { background: #e6d3ba; }
+  .btn-block { width: 100%; margin-top: 10px; }
+
+  .photo-preview-box { margin-top: 12px; }
+  .photo-preview-box img { width: 100%; max-height: 220px; object-fit: cover; border-radius: 12px; display: block; }
+  .ai-note {
+    margin-top: 8px; font-size: 14px; background: #fff2df; color: #a85f16;
+    padding: 8px 10px; border-radius: 8px; border: 1px dashed #e6b978;
+  }
+
+  .tabs { display: flex; gap: 8px; margin: 4px 0 16px; flex-wrap: wrap; }
+  .tabs button { flex: 1; min-width: 70px; background: #f3e5d3; color: #6b4f37; }
+  .tabs button.active { background: #e08b3d; color: #fff; font-weight: bold; }
+
+  .dish-card { padding: 0; overflow: hidden; }
+  .dish-photo { width: 100%; height: 180px; object-fit: cover; display: block; background: #f3e5d3; }
+  .dish-photo-placeholder {
+    width: 100%; height: 180px; display: flex; align-items: center; justify-content: center;
+    font-size: 56px;
+  }
+  .dish-body { padding: 14px 16px 16px; }
+  .dish-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .dish-name { font-size: 19px; font-weight: bold; margin: 0; }
+  .dish-tag {
+    font-size: 12px; padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+    background: #f3e5d3; color: #6b4f37;
+  }
+  .dish-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .dish-actions button { font-size: 13px; padding: 7px 12px; }
+
+  .detail { margin-top: 14px; border-top: 1px dashed #e6d3ba; padding-top: 12px; }
+  .detail h3 { font-size: 14px; color: #8a7565; margin: 10px 0 6px; }
+  .detail ul, .detail ol { margin: 0; padding-left: 20px; font-size: 15px; }
+  .detail li { margin-bottom: 4px; }
+  .empty-detail-note { font-size: 14px; color: #b09a86; font-style: normal; }
+
+  .share-box textarea { margin-top: 8px; font-size: 13px; min-height: 100px; }
+  .share-tip { font-size: 12px; color: #8a7565; margin-top: 4px; }
+
+  .edit-form { margin-top: 12px; border-top: 1px dashed #e6d3ba; padding-top: 12px; }
+  .empty-list { text-align: center; color: #b09a86; padding: 30px 10px; }
+
+  .status-msg { text-align: center; font-size: 13px; color: #c96f26; margin-top: 8px; min-height: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🍲 妈妈的拿手菜</h1>
+    <p>拍张照，记下妈妈的味道，做饭时手机一打开就能看</p>
+  </header>
+
+  <div class="summary" id="summaryText"></div>
+
+  <div class="card">
+    <h2>📷 记一道新菜</h2>
+    <button type="button" class="btn-primary btn-block" id="takePhotoBtn">拍照 / 选一张成品照</button>
+    <input type="file" accept="image/*" capture="environment" id="photoInput" style="display:none">
+
+    <div class="photo-preview-box" id="photoPreviewBox" style="display:none">
+      <img id="photoPreviewImg" alt="菜品照片预览">
+      <div class="ai-note" id="aiNote"></div>
+    </div>
+
+    <label for="newDishName">菜名（AI识别结果可以直接改）</label>
+    <input type="text" id="newDishName" placeholder="比如：红烧肉">
+
+    <label for="newDishCategory">分类</label>
+    <select id="newDishCategory">
+      <option value="荤菜">🍖 荤菜</option>
+      <option value="素菜">🥬 素菜</option>
+      <option value="汤">🍲 汤</option>
+    </select>
+
+    <label for="newDishIngredients">材料（可以先不填，以后再补充，一行一样）</label>
+    <textarea id="newDishIngredients" placeholder="五花肉 500克&#10;生姜 3片"></textarea>
+
+    <label for="newDishSteps">步骤（可以先不填，以后再补充，一行一步）</label>
+    <textarea id="newDishSteps" placeholder="焯水&#10;炒糖色&#10;小火炖40分钟"></textarea>
+
+    <button type="button" class="btn-primary btn-block" id="saveNewDishBtn">保存这道菜</button>
+    <div class="status-msg" id="statusMsg"></div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div id="dishList"></div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = "demofactory:mama-recipes:v1";
+  var CATS = ["荤菜", "素菜", "汤"];
+  var CAT_INFO = {
+    "荤菜": { emoji: "🍖", color: "#f3d9c4" },
+    "素菜": { emoji: "🥬", color: "#dcead0" },
+    "汤":   { emoji: "🍲", color: "#f7e2b8" }
+  };
+  var AI_GUESSES = [
+    { name: "红烧排骨", category: "荤菜" },
+    { name: "糖醋里脊", category: "荤菜" },
+    { name: "可乐鸡翅", category: "荤菜" },
+    { name: "清炒油麦菜", category: "素菜" },
+    { name: "蒜蓉西兰花", category: "素菜" },
+    { name: "手撕包菜", category: "素菜" },
+    { name: "紫菜蛋花汤", category: "汤" },
+    { name: "冬瓜排骨汤", category: "汤" },
+    { name: "番茄土豆汤", category: "汤" }
+  ];
+
+  function escapeHtml(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  function seedRecipes() {
+    return [
+      {
+        id: "seed1",
+        name: "红烧肉",
+        category: "荤菜",
+        photo: "",
+        ingredients: ["五花肉 500克", "生姜 3片", "大葱 2段", "八角 2颗", "桂皮 1小块", "冰糖 30克", "生抽 3勺", "老抽 1勺", "料酒 2勺", "食用油 适量"],
+        steps: ["五花肉切3厘米见方的块，冷水下锅焯水，加姜片和料酒，煮5分钟后捞出洗净", "锅里放少许油，小火放入冰糖炒出糖色", "倒入五花肉块，翻炒至表面裹满糖色", "加入姜片、葱段、八角、桂皮，翻炒出香味", "加生抽、老抽、料酒，倒入没过肉块的热水，大火烧开", "转小火炖40分钟，最后大火收汁即可出锅"],
+        createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5
+      },
+      {
+        id: "seed2",
+        name: "清炒时蔬",
+        category: "素菜",
+        photo: "",
+        ingredients: ["时令绿叶菜 300克（油菜/生菜均可）", "蒜瓣 2瓣", "食用油 适量", "盐 适量"],
+        steps: ["蔬菜洗净，沥干水分", "蒜瓣拍碎切末", "热锅倒油，放入蒜末爆香", "转大火，放入蔬菜快速翻炒1-2分钟", "加盐调味，炒匀即可出锅"],
+        createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3
+      },
+      {
+        id: "seed3",
+        name: "番茄蛋汤",
+        category: "汤",
+        photo: "",
+        ingredients: [],
+        steps: [],
+        createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1
+      }
+    ];
+  }
+
+  function normalizeRecipe(r) {
+    if (!r || typeof r !== "object") return null;
+    return {
+      id: r.id || ("r" + Date.now() + Math.random().toString(36).slice(2)),
+      name: r.name || "未命名菜",
+      category: CATS.indexOf(r.category) !== -1 ? r.category : "荤菜",
+      photo: typeof r.photo === "string" ? r.photo : "",
+      ingredients: Array.isArray(r.ingredients) ? r.ingredients : [],
+      steps: Array.isArray(r.steps) ? r.steps : [],
+      createdAt: typeof r.createdAt === "number" ? r.createdAt : Date.now()
+    };
+  }
+
+  function loadRecipes() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return seedRecipes();
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return seedRecipes();
+      var normalized = parsed.map(normalizeRecipe).filter(Boolean);
+      return normalized;
+    } catch (e) {
+      return seedRecipes();
+    }
+  }
+
+  function saveRecipes() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes));
+    } catch (e) {
+      showStatus("保存失败，可能是图片太大，试试换一张小一点的照片");
+    }
+  }
+
+  function showStatus(msg) {
+    var el = document.getElementById("statusMsg");
+    if (el) {
+      el.textContent = msg || "";
+      if (msg) setTimeout(function () { if (el.textContent === msg) el.textContent = ""; }, 3000);
+    }
+  }
+
+  var recipes = loadRecipes();
+  var filter = "全部";
+  var expandedIds = {};
+  if (recipes[0]) expandedIds[recipes[0].id] = true;
+  var editingId = null;
+  var sharingId = null;
+  var pendingPhoto = "";
+
+  function renderTabs() {
+    var el = document.getElementById("tabs");
+    if (!el) return;
+    var opts = ["全部"].concat(CATS);
+    var html = "";
+    for (var i = 0; i < opts.length; i++) {
+      var c = opts[i];
+      html += '<button type="button" class="tab-btn' + (filter === c ? " active" : "") + '" data-cat="' + escapeHtml(c) + '">' + escapeHtml(c) + '</button>';
+    }
+    el.innerHTML = html;
+    var btns = el.querySelectorAll(".tab-btn");
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].addEventListener("click", function () {
+        filter = this.getAttribute("data-cat");
+        render();
+      });
+    }
+  }
+
+  function renderSummary() {
+    var el = document.getElementById("summaryText");
+    if (!el) return;
+    el.textContent = "已经记录了 " + recipes.length + " 道妈妈的拿手菜 · 目标 20-30 道";
+  }
+
+  function dishCardHtml(dish) {
+    var info = CAT_INFO[dish.category] || CAT_INFO["荤菜"];
+    var photoHtml = dish.photo
+      ? '<img class="dish-photo" src="' + dish.photo + '" alt="' + escapeHtml(dish.name) + '">'
+      : '<div class="dish-photo-placeholder" style="background:' + info.color + '">' + info.emoji + '</div>';
+
+    var expanded = !!expandedIds[dish.id];
+    var toggleLabel = expanded ? "收起 ▲" : "查看材料/步骤 ▼";
+
+    var detailHtml = "";
+    if (expanded) {
+      if (dish.ingredients.length === 0 && dish.steps.length === 0) {
+        detailHtml = '<div class="detail"><p class="empty-detail-note">材料和步骤还没填，点一下下面的「补充材料/步骤」慢慢加～</p></div>';
+      } else {
+        var ingHtml = "";
+        for (var i = 0; i < dish.ingredients.length; i++) {
+          ingHtml += "<li>" + escapeHtml(dish.ingredients[i]) + "</li>";
+        }
+        var stepHtml = "";
+        for (var k = 0; k < dish.steps.length; k++) {
+          stepHtml += "<li>" + escapeHtml(dish.steps[k]) + "</li>";
+        }
+        detailHtml = '<div class="detail">'
+          + (ingHtml ? '<h3>材料</h3><ul>' + ingHtml + '</ul>' : '')
+          + (stepHtml ? '<h3>步骤</h3><ol>' + stepHtml + '</ol>' : '')
+          + '</div>';
+      }
+    }
+
+    var shareHtml = "";
+    if (sharingId === dish.id) {
+      var shareText = dish.name + "（" + dish.category + "）\n\n材料：\n" + (dish.ingredients.length ? dish.ingredients.join("\n") : "（待补充）") + "\n\n步骤：\n" + (dish.steps.length ? dish.steps.join("\n") : "（待补充）");
+      shareHtml = '<div class="share-box"><textarea readonly id="shareText-' + dish.id + '">' + escapeHtml(shareText) + '</textarea>'
+        + '<div class="share-tip">长按文本框可全选复制，发给家人吧</div>'
+        + '<button type="button" class="btn-secondary" data-copy="' + dish.id + '" style="margin-top:6px">复制文本</button></div>';
+    }
+
+    var editHtml = "";
+    if (editingId === dish.id) {
+      editHtml = '<div class="edit-form">'
+        + '<label>菜名</label><input type="text" id="editName-' + dish.id + '" value="' + escapeHtml(dish.name) + '">'
+        + '<label>分类</label><select id="editCategory-' + dish.id + '">'
+        + CATS.map(function (c) { return '<option value="' + c + '"' + (c === dish.category ? " selected" : "") + '>' + CAT_INFO[c].emoji + " " + c + '</option>'; }).join("")
+        + '</select>'
+        + '<label>材料（一行一样）</label><textarea id="editIngredients-' + dish.id + '">' + escapeHtml(dish.ingredients.join("\n")) + '</textarea>'
+        + '<label>步骤（一行一步）</label><textarea id="editSteps-' + dish.id + '">' + escapeHtml(dish.steps.join("\n")) + '</textarea>'
+        + '<button type="button" class="btn-primary btn-block" data-save-edit="' + dish.id + '">保存修改</button>'
+        + '</div>';
+    }
+
+    return '<div class="card dish-card">'
+      + photoHtml
+      + '<div class="dish-body">'
+      + '<div class="dish-top"><h3 class="dish-name">' + escapeHtml(dish.name) + '</h3><span class="dish-tag" style="background:' + info.color + '">' + info.emoji + ' ' + dish.category + '</span></div>'
+      + '<div class="dish-actions">'
+      + '<button type="button" class="btn-secondary" data-toggle="' + dish.id + '">' + toggleLabel + '</button>'
+      + '<button type="button" class="btn-secondary" data-edit="' + dish.id + '">' + (editingId === dish.id ? "收起编辑" : (dish.ingredients.length === 0 && dish.steps.length === 0 ? "补充材料/步骤" : "编辑")) + '</button>'
+      + '<button type="button" class="btn-secondary" data-share="' + dish.id + '">' + (sharingId === dish.id ? "收起分享" : "分享给家人") + '</button>'
+      + '</div>'
+      + detailHtml
+      + shareHtml
+      + editHtml
+      + '</div></div>';
+  }
+
+  function renderList() {
+    var el = document.getElementById("dishList");
+    if (!el) return;
+    var list = recipes.filter(function (d) { return filter === "全部" || d.category === filter; });
+    if (list.length === 0) {
+      el.innerHTML = '<div class="empty-list">还没有这个分类的菜，上面拍张照记一道吧 🍽️</div>';
+      return;
+    }
+    var html = "";
+    for (var i = 0; i < list.length; i++) html += dishCardHtml(list[i]);
+    el.innerHTML = html;
+
+    var toggles = el.querySelectorAll("[data-toggle]");
+    for (var t = 0; t < toggles.length; t++) {
+      toggles[t].addEventListener("click", function () {
+        var id = this.getAttribute("data-toggle");
+        expandedIds[id] = !expandedIds[id];
+        render();
+      });
+    }
+    var edits = el.querySelectorAll("[data-edit]");
+    for (var e = 0; e < edits.length; e++) {
+      edits[e].addEventListener("click", function () {
+        var id = this.getAttribute("data-edit");
+        editingId = (editingId === id) ? null : id;
+        if (editingId) expandedIds[id] = true;
+        sharingId = null;
+        render();
+      });
+    }
+    var shares = el.querySelectorAll("[data-share]");
+    for (var s = 0; s < shares.length; s++) {
+      shares[s].addEventListener("click", function () {
+        var id = this.getAttribute("data-share");
+        sharingId = (sharingId === id) ? null : id;
+        editingId = null;
+        render();
+      });
+    }
+    var copies = el.querySelectorAll("[data-copy]");
+    for (var c = 0; c < copies.length; c++) {
+      copies[c].addEventListener("click", function () {
+        var id = this.getAttribute("data-copy");
+        var ta = document.getElementById("shareText-" + id);
+        if (!ta) return;
+        ta.select();
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(ta.value).catch(function () {});
+          }
+        } catch (err) {}
+      });
+    }
+    var saveEdits = el.querySelectorAll("[data-save-edit]");
+    for (var se = 0; se < saveEdits.length; se++) {
+      saveEdits[se].addEventListener("click", function () {
+        var id = this.getAttribute("data-save-edit");
+        var nameEl = document.getElementById("editName-" + id);
+        var catEl = document.getElementById("editCategory-" + id);
+        var ingEl = document.getElementById("editIngredients-" + id);
+        var stepEl = document.getElementById("editSteps-" + id);
+        var dish = null;
+        for (var i2 = 0; i2 < recipes.length; i2++) { if (recipes[i2].id === id) { dish = recipes[i2]; break; } }
+        if (!dish) return;
+        dish.name = (nameEl && nameEl.value.trim()) || dish.name;
+        dish.category = (catEl && CATS.indexOf(catEl.value) !== -1) ? catEl.value : dish.category;
+        dish.ingredients = (ingEl ? ingEl.value.split("\n") : []).map(function (x) { return x.trim(); }).filter(function (x) { return x.length > 0; });
+        dish.steps = (stepEl ? stepEl.value.split("\n") : []).map(function (x) { return x.trim(); }).filter(function (x) { return x.length > 0; });
+        saveRecipes();
+        editingId = null;
+        render();
+      });
+    }
+  }
+
+  function render() {
+    renderSummary();
+    renderTabs();
+    renderList();
+  }
+
+  // ---- Add new dish flow ----
+  var takePhotoBtn = document.getElementById("takePhotoBtn");
+  var photoInput = document.getElementById("photoInput");
+  if (takePhotoBtn && photoInput) {
+    takePhotoBtn.addEventListener("click", function () { photoInput.click(); });
+    photoInput.addEventListener("change", function () {
+      var file = photoInput.files && photoInput.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        pendingPhoto = ev.target.result || "";
+        var box = document.getElementById("photoPreviewBox");
+        var img = document.getElementById("photoPreviewImg");
+        if (img) img.src = pendingPhoto;
+        if (box) box.style.display = "block";
+
+        var guess = AI_GUESSES[Math.floor(Math.random() * AI_GUESSES.length)];
+        var nameEl = document.getElementById("newDishName");
+        var catEl = document.getElementById("newDishCategory");
+        if (nameEl) nameEl.value = guess.name;
+        if (catEl) catEl.value = guess.category;
+        var note = document.getElementById("aiNote");
+        if (note) note.textContent = "🤖 AI识别结果：" + guess.name + "（" + guess.category + "）— 仅供参考，请核对或修改菜名";
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  var saveNewDishBtn = document.getElementById("saveNewDishBtn");
+  if (saveNewDishBtn) {
+    saveNewDishBtn.addEventListener("click", function () {
+      var nameEl = document.getElementById("newDishName");
+      var catEl = document.getElementById("newDishCategory");
+      var ingEl = document.getElementById("newDishIngredients");
+      var stepEl = document.getElementById("newDishSteps");
+
+      var name = (nameEl && nameEl.value.trim()) || "";
+      if (!name) {
+        showStatus("请先拍照或填一个菜名");
+        return;
+      }
+      var category = (catEl && CATS.indexOf(catEl.value) !== -1) ? catEl.value : "荤菜";
+      var ingredients = (ingEl ? ingEl.value.split("\n") : []).map(function (x) { return x.trim(); }).filter(function (x) { return x.length > 0; });
+      var steps = (stepEl ? stepEl.value.split("\n") : []).map(function (x) { return x.trim(); }).filter(function (x) { return x.length > 0; });
+
+      var newDish = {
+        id: "r" + Date.now() + Math.random().toString(36).slice(2),
+        name: name,
+        category: category,
+        photo: pendingPhoto,
+        ingredients: ingredients,
+        steps: steps,
+        createdAt: Date.now()
+      };
+      recipes.unshift(newDish);
+      saveRecipes();
+
+      // reset form
+      if (nameEl) nameEl.value = "";
+      if (catEl) catEl.value = "荤菜";
+      if (ingEl) ingEl.value = "";
+      if (stepEl) stepEl.value = "";
+      pendingPhoto = "";
+      var box = document.getElementById("photoPreviewBox");
+      if (box) box.style.display = "none";
+      var note = document.getElementById("aiNote");
+      if (note) note.textContent = "";
+      if (photoInput) photoInput.value = "";
+
+      showStatus("已保存「" + name + "」🎉");
+      filter = "全部";
+      render();
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

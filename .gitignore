@@ -1,0 +1,7 @@
+node_modules/
+sessions/*.json
+.claude-handoff/
+.DS_Store
+*.log
+KICKOFF.md
+PROMPT_FABLE5.md

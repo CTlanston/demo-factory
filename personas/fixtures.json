@@ -1,0 +1,886 @@
+{
+ "_contract": {
+  "one_line_idea": "vague, non-technical, what a novice would actually type",
+  "canned_answers": "free-text answer for interview question i (by index); if the wizard asks more questions than answers, the runner picks the first multiple-choice option",
+  "must_have_features": "DOM probes against generated demo.html; a probe passes if ANY text in text_any appears in the page probe-text (document.title + body innerText + placeholder/aria-label/value/title attributes, matched case-insensitively), AND (if selector_any present) ANY selector matches; each selector_any item is ONE simple CSS selector",
+  "banned": "terms that must NOT appear in interview questions for this persona, on top of the global banned-term list"
+ },
+ "personas": [
+  {
+   "id": "jz1",
+   "domain": "记账",
+   "lang": "zh",
+   "one_line_idea": "我想记一下每天花了多少钱",
+   "canned_answers": [
+    "就我自己用",
+    "每天买菜、坐车、吃饭这些小开销",
+    "想看每个月总共花了多少",
+    "手机上能用就行",
+    "不需要,越简单越好",
+    "想按吃饭、交通这样分个类",
+    "不用提醒,我自己会记",
+    "没有了,简单就好"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "金额输入",
+      "text_any": [
+       "金额",
+       "元",
+       "多少钱",
+       "¥"
+      ],
+      "selector_any": [
+       "input",
+       "button"
+      ]
+     },
+     {
+      "name": "记录列表或汇总",
+      "text_any": [
+       "记录",
+       "合计",
+       "总共",
+       "汇总",
+       "支出",
+       "统计",
+       "总计",
+       "消费",
+       "花销",
+       "明细",
+       "排行",
+       "花费"
+      ]
+     }
+    ],
+    "banned": [
+     "记账软件API",
+     "数据库"
+    ]
+   }
+  },
+  {
+   "id": "jz2",
+   "domain": "记账",
+   "lang": "en",
+   "one_line_idea": "I keep forgetting where my money goes each month",
+   "canned_answers": [
+    "Just me",
+    "Everyday stuff like coffee, groceries, transport",
+    "I want to see a monthly total",
+    "On my phone mostly",
+    "Categories would be nice, like food and fun",
+    "No reminders needed",
+    "Keep it really simple",
+    "That's all"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "amount entry",
+      "text_any": [
+       "amount",
+       "spent",
+       "$"
+      ],
+      "selector_any": [
+       "input",
+       "button"
+      ]
+     },
+     {
+      "name": "total or list",
+      "text_any": [
+       "total",
+       "expenses",
+       "spending",
+       "receipts",
+       "purchases",
+       "transactions",
+       "history"
+      ]
+     }
+    ],
+    "banned": [
+     "database",
+     "backend"
+    ]
+   }
+  },
+  {
+   "id": "xc1",
+   "domain": "相册",
+   "lang": "zh",
+   "one_line_idea": "想把宝宝的照片按月份整理起来",
+   "canned_answers": [
+    "给家里人看的",
+    "按月份分开,一个月一组",
+    "想在照片下面写一两句话",
+    "手机和电脑都想看",
+    "照片就在我手机里",
+    "不用分享给陌生人,家人看就行",
+    "越温馨越好",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "照片区域",
+      "text_any": [
+       "照片",
+       "上传",
+       "选择图片"
+      ],
+      "selector_any": [
+       "input[type=file]",
+       "img",
+       ".photo",
+       ".album",
+       "[class*=photo]",
+       "[class*=album]"
+      ]
+     },
+     {
+      "name": "月份分组",
+      "text_any": [
+       "月",
+       "月份"
+      ]
+     }
+    ],
+    "banned": [
+     "云存储",
+     "服务器"
+    ]
+   }
+  },
+  {
+   "id": "xc2",
+   "domain": "相册",
+   "lang": "zh",
+   "one_line_idea": "我拍了好多花的照片想做成一个可以翻的册子",
+   "canned_answers": [
+    "自己欣赏,偶尔给朋友看",
+    "想一页一页翻着看",
+    "每张花想写上名字",
+    "平板上看效果最好",
+    "大概几十张",
+    "想要淡雅一点的感觉",
+    "不需要",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "翻页浏览",
+      "text_any": [
+       "下一",
+       "上一",
+       "翻页",
+       "下一页",
+       "next",
+       "←",
+       "→",
+       "❮",
+       "❯"
+      ],
+      "selector_any": [
+       "button"
+      ]
+     },
+     {
+      "name": "照片与名字",
+      "text_any": [
+       "照片",
+       "名字",
+       "花"
+      ],
+      "selector_any": [
+       "img",
+       "input[type=file]",
+       "input[type=text]",
+       "[class*=photo]"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "bl1",
+   "domain": "报名接龙",
+   "lang": "zh",
+   "one_line_idea": "小区羽毛球活动想让大家接龙报名",
+   "canned_answers": [
+    "小区群里的邻居,大概三十来人",
+    "每周六下午打球,提前报名",
+    "报名字和几个人一起来",
+    "想看到谁已经报了,像接龙一样",
+    "场地最多16个人,满了就排队",
+    "微信群里发链接",
+    "不用收费",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "报名输入",
+      "text_any": [
+       "报名",
+       "名字",
+       "姓名"
+      ],
+      "selector_any": [
+       "input",
+       "button"
+      ]
+     },
+     {
+      "name": "接龙名单",
+      "text_any": [
+       "名单",
+       "已报名",
+       "接龙"
+      ]
+     }
+    ],
+    "banned": [
+     "小程序开发",
+     "后端"
+    ]
+   }
+  },
+  {
+   "id": "bl2",
+   "domain": "报名接龙",
+   "lang": "zh",
+   "one_line_idea": "家长会需要统计谁能来",
+   "canned_answers": [
+    "班里40多位家长",
+    "只要知道来还是不来",
+    "顺便留个电话方便联系",
+    "想看统计,多少人来多少人不来",
+    "发到家长群里让大家自己填",
+    "下周五之前要统计完",
+    "简单最重要,家长年纪都不小",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "出席选择",
+      "text_any": [
+       "能来",
+       "不能来",
+       "参加",
+       "出席"
+      ],
+      "selector_any": [
+       "input",
+       "button",
+       "select"
+      ]
+     },
+     {
+      "name": "统计结果",
+      "text_any": [
+       "统计",
+       "人数",
+       "已填"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "cp1",
+   "domain": "菜谱",
+   "lang": "zh",
+   "one_line_idea": "想把我妈的拿手菜记下来",
+   "canned_answers": [
+    "记给自己和家人看",
+    "大概二三十道菜",
+    "每道菜想记材料和步骤",
+    "最好能放一张成品照片",
+    "想按荤菜素菜汤分类",
+    "手机上看着做饭",
+    "字要大一点",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "菜名与步骤",
+      "text_any": [
+       "菜名",
+       "步骤",
+       "做法",
+       "材料"
+      ],
+      "selector_any": [
+       "input",
+       "textarea"
+      ]
+     },
+     {
+      "name": "分类浏览",
+      "text_any": [
+       "荤",
+       "素",
+       "汤",
+       "分类"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "cp2",
+   "domain": "菜谱",
+   "lang": "en",
+   "one_line_idea": "I want a place to save recipes I find so I can cook them later",
+   "canned_answers": [
+    "Just for me",
+    "Recipes from websites and from my mom",
+    "Ingredients and steps, maybe a photo",
+    "I'd love to mark ones I've tried",
+    "Search by name would help",
+    "On my phone in the kitchen",
+    "Big readable text please",
+    "That's all"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "recipe entry",
+      "text_any": [
+       "recipe",
+       "ingredients",
+       "steps"
+      ],
+      "selector_any": [
+       "input",
+       "textarea"
+      ]
+     },
+     {
+      "name": "saved list",
+      "text_any": [
+       "saved",
+       "my recipes",
+       "list",
+       "tried",
+       "save",
+       "keeper",
+       "collection",
+       "cookbook"
+      ]
+     }
+    ],
+    "banned": [
+     "API",
+     "scraping"
+    ]
+   }
+  },
+  {
+   "id": "js1",
+   "domain": "健身打卡",
+   "lang": "zh",
+   "one_line_idea": "想每天提醒自己锻炼并打卡",
+   "canned_answers": [
+    "就我自己",
+    "每天做20分钟拉伸和俯卧撑",
+    "打个卡,记录今天做没做",
+    "想看连续坚持了多少天",
+    "断了一天也别太打击我",
+    "晚上八点左右锻炼",
+    "简单一点,一按就打卡",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "打卡按钮",
+      "text_any": [
+       "打卡",
+       "完成",
+       "今天"
+      ],
+      "selector_any": [
+       "button"
+      ]
+     },
+     {
+      "name": "坚持天数",
+      "text_any": [
+       "连续",
+       "坚持",
+       "打卡记录"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "js2",
+   "domain": "健身打卡",
+   "lang": "zh",
+   "one_line_idea": "和朋友比赛谁坚持跑步更久",
+   "canned_answers": [
+    "我和三个朋友",
+    "每天跑步,跑了就记一下",
+    "想比谁坚持的天数多",
+    "有个排行榜最好",
+    "每个人自己记自己的",
+    "输的人请吃饭",
+    "要能看到大家的记录",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "跑步记录",
+      "text_any": [
+       "跑步",
+       "打卡",
+       "记录"
+      ],
+      "selector_any": [
+       "button",
+       "input"
+      ]
+     },
+     {
+      "name": "排行对比",
+      "text_any": [
+       "排行",
+       "排名",
+       "第一",
+       "天数"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "xd1",
+   "domain": "小店价目表",
+   "lang": "zh",
+   "one_line_idea": "我开奶茶店想要一个能给客人看的价目表",
+   "canned_answers": [
+    "店里扫码看,也发朋友圈",
+    "大概20多种饮品",
+    "分奶茶、果茶、小料三类",
+    "价格经常调,最好我自己能改",
+    "想放店里的照片当背景",
+    "要有招牌推荐",
+    "颜色暖一点,像奶茶的感觉",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "饮品与价格",
+      "text_any": [
+       "奶茶",
+       "果茶",
+       "元",
+       "价"
+      ]
+     },
+     {
+      "name": "分类或推荐",
+      "text_any": [
+       "分类",
+       "推荐",
+       "招牌",
+       "小料"
+      ]
+     }
+    ],
+    "banned": [
+     "点单系统",
+     "支付接口"
+    ]
+   }
+  },
+  {
+   "id": "xd2",
+   "domain": "小店价目表",
+   "lang": "zh",
+   "one_line_idea": "美甲店想展示款式和价格",
+   "canned_answers": [
+    "发给客人看,也放店里",
+    "每个款式一张图加价格",
+    "分手部和足部两类",
+    "想标出这个月的新款",
+    "客人喜欢直接来店里做",
+    "留个店的地址和微信",
+    "粉色系,精致一点",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "款式展示",
+      "text_any": [
+       "款式",
+       "美甲",
+       "新款"
+      ],
+      "selector_any": [
+       "img",
+       "[class*=card]",
+       "[class*=item]"
+      ]
+     },
+     {
+      "name": "价格与联系",
+      "text_any": [
+       "元",
+       "价",
+       "微信",
+       "地址"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "bj1",
+   "domain": "班级通知",
+   "lang": "zh",
+   "one_line_idea": "老师发通知家长老是看不到,想要个通知板",
+   "canned_answers": [
+    "我是班主任,发给40多位家长",
+    "作业、活动、放假安排这些",
+    "重要的通知想置顶",
+    "想知道哪些通知是新的",
+    "家长点开就能看,不用登录",
+    "一周发三四条",
+    "字大一点,爷爷奶奶也看得清",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "通知列表",
+      "text_any": [
+       "通知",
+       "作业",
+       "安排"
+      ]
+     },
+     {
+      "name": "置顶或新标记",
+      "text_any": [
+       "置顶",
+       "最新",
+       "重要",
+       "NEW",
+       "⭐",
+       "📌"
+      ]
+     }
+    ],
+    "banned": [
+     "推送服务",
+     "服务器"
+    ]
+   }
+  },
+  {
+   "id": "bj2",
+   "domain": "班级通知",
+   "lang": "zh",
+   "one_line_idea": "班级值日表想让大家都能查",
+   "canned_answers": [
+    "全班45个同学",
+    "每天5个人值日,按周轮",
+    "想查今天轮到谁",
+    "扫地、擦黑板这些分工也想标",
+    "贴在班级群里",
+    "每学期排一次",
+    "一眼能看到今天是谁最重要",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "值日安排",
+      "text_any": [
+       "值日",
+       "轮到",
+       "分工"
+      ]
+     },
+     {
+      "name": "今天是谁",
+      "text_any": [
+       "今天",
+       "本周",
+       "星期"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "cw1",
+   "domain": "宠物记录",
+   "lang": "zh",
+   "one_line_idea": "想记录我家猫的体重和疫苗",
+   "canned_answers": [
+    "就记我家一只猫",
+    "每个月称一次体重",
+    "疫苗打了哪些、下次什么时候打",
+    "想看体重是胖了还是瘦了",
+    "顺便记驱虫",
+    "下次疫苗快到了能看出来最好",
+    "可爱一点的风格",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "体重记录",
+      "text_any": [
+       "体重",
+       "kg",
+       "公斤",
+       "斤"
+      ],
+      "selector_any": [
+       "input",
+       "button"
+      ]
+     },
+     {
+      "name": "疫苗记录",
+      "text_any": [
+       "疫苗",
+       "驱虫",
+       "下次"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "cw2",
+   "domain": "宠物记录",
+   "lang": "en",
+   "one_line_idea": "I want to track my dog's walks and meals",
+   "canned_answers": [
+    "One dog, a golden retriever",
+    "Two walks and two meals a day",
+    "Just tap to log when it happens",
+    "I want to see today at a glance",
+    "My partner also logs sometimes",
+    "A weekly view would be nice",
+    "Playful style, he's a happy dog",
+    "That's all"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "log walk/meal",
+      "text_any": [
+       "walk",
+       "meal",
+       "feed"
+      ],
+      "selector_any": [
+       "button"
+      ]
+     },
+     {
+      "name": "today overview",
+      "text_any": [
+       "today",
+       "week"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "ds1",
+   "domain": "读书笔记",
+   "lang": "zh",
+   "one_line_idea": "看完书总忘,想记点读后感",
+   "canned_answers": [
+    "自己记自己看",
+    "一个月看两三本",
+    "记书名、几句感想、打个分",
+    "想按打分排着看",
+    "偶尔想摘抄一两句原文",
+    "手机电脑都会用",
+    "安静简洁的感觉",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "书名与感想",
+      "text_any": [
+       "书名",
+       "感想",
+       "笔记"
+      ],
+      "selector_any": [
+       "input",
+       "textarea"
+      ]
+     },
+     {
+      "name": "打分",
+      "text_any": [
+       "分",
+       "评分",
+       "星"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "ds2",
+   "domain": "读书笔记",
+   "lang": "zh",
+   "one_line_idea": "想给孩子记录读过的绘本",
+   "canned_answers": [
+    "记我女儿的,她5岁",
+    "每周读四五本绘本",
+    "记书名和她喜不喜欢",
+    "想看总共读了多少本",
+    "她特别喜欢的想标个小星星",
+    "以后给她看,像成长记录",
+    "童趣一点,颜色鲜艳",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "绘本记录",
+      "text_any": [
+       "绘本",
+       "书名",
+       "读过"
+      ],
+      "selector_any": [
+       "input",
+       "button"
+      ]
+     },
+     {
+      "name": "总数或喜爱标记",
+      "text_any": [
+       "总共",
+       "喜欢",
+       "星星",
+       "收藏",
+       "⭐",
+       "☆"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "sr1",
+   "domain": "生日提醒",
+   "lang": "zh",
+   "one_line_idea": "老忘记亲戚生日,想要提醒",
+   "canned_answers": [
+    "记全家亲戚,大概20个人",
+    "有的是农历生日",
+    "想提前三天知道",
+    "记名字、生日、和我的关系",
+    "打开就能看到最近谁过生日",
+    "不用送礼建议,记住就行",
+    "喜庆一点",
+    "没有了"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "生日名单",
+      "text_any": [
+       "生日",
+       "名字",
+       "亲戚"
+      ],
+      "selector_any": [
+       "input",
+       "button"
+      ]
+     },
+     {
+      "name": "最近提醒",
+      "text_any": [
+       "最近",
+       "还有",
+       "提醒",
+       "即将"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  },
+  {
+   "id": "sr2",
+   "domain": "生日提醒",
+   "lang": "en",
+   "one_line_idea": "I always miss my friends' birthdays",
+   "canned_answers": [
+    "About 15 friends",
+    "Name and date is enough",
+    "Show me who's coming up next",
+    "A week's heads-up would be great",
+    "Maybe a little note about gift ideas",
+    "I check my phone every morning",
+    "Fun and colorful",
+    "That's all"
+   ],
+   "expectations": {
+    "must_have_features": [
+     {
+      "name": "birthday list",
+      "text_any": [
+       "birthday",
+       "name",
+       "date"
+      ],
+      "selector_any": [
+       "input",
+       "button"
+      ]
+     },
+     {
+      "name": "upcoming view",
+      "text_any": [
+       "upcoming",
+       "next",
+       "days"
+      ]
+     }
+    ],
+    "banned": []
+   }
+  }
+ ]
+}
