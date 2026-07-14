@@ -13,11 +13,21 @@
 
 ## 启动 / Start
 
+最快的一行(不用 clone):
+
+```bash
+npx github:CTlanston/demo-factory
+# → demo-factory 已启动 → http://localhost:3210
+```
+
+或者 clone 后启动:
+
 ```bash
 git clone https://github.com/CTlanston/demo-factory.git && cd demo-factory
 npm start
-# → demo-factory 已启动 → http://localhost:3210
 ```
+
+只在你自己的电脑上可访问(只监听 127.0.0.1);会话是本机 `sessions/` 里的 JSON 文件,只保留最近 200 个。macOS / Linux 直接可用;Windows:单元测试与打桩端到端在 CI 的 Windows 上验证,但真实引擎路径还没在 Windows 真机上验证过——遇到问题请开 issue。
 
 没有 `npm install` 这一步——产品零运行时依赖。(`npm test` 也不需要装任何东西;只有跑真实端到端测试 `personas/runner.js` 才需要 `npm install` 装 puppeteer-core。)
 

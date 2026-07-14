@@ -16,3 +16,5 @@ Anything below was considered and rejected for v1. Do not implement without a ne
 - **Option-aware capture probes** (from G3 final review): must_have_features are option-blind — a hands-free option (auto-tracker/sync) legitimately negates a manual-entry probe (jz2 s2 class). Fixtures could carry per-option-shape expectations; capture probes are currently text-effectively-only since `button` is near-universal. Deferred: v1 gate is green without it; revisit if novice feedback surfaces option-mismatch confusion.
 
 - **README GIF walkthrough**(contract §5, post-v0.1.0):v0.1.0 以 4 张真实流程截图替代(docs/walkthrough/,内容来自未经修改的真实 G4 session,评审确认为 disclosed substitution)。后续用 ffmpeg/录屏做成 GIF 或短视频。
+
+- **npm registry publish**(iter9 review n6):当前 `"private": true` + `npx github:` 分发是刻意选择(防误发 registry);若小白验证给出正信号,再决定是否正式 `npm publish`(需要 npm 账号与用户确认)。

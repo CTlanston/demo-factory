@@ -388,11 +388,69 @@ function createServer() {
   return server;
 }
 
-if (require.main === module) {
-  const port = Number(process.env.PORT || 3210);
-  createServer().listen(port, () => {
-    console.log(`demo-factory 已启动 → http://localhost:${port}`);
-  });
+// Keep only the newest N session files — sessions are one JSON each and grow forever
+// otherwise. N is generous: a novice creating 200 sessions has other problems.
+function gcSessions(keep = 200) {
+  try {
+    const names = fs.readdirSync(SESSIONS_DIR);
+    // crash leftovers from atomic writes: any .json.tmp older than an hour is garbage
+    for (const f of names.filter((n) => n.endsWith('.json.tmp'))) {
+      const full = path.join(SESSIONS_DIR, f);
+      if (Date.now() - fs.statSync(full).mtimeMs > 60 * 60 * 1000) fs.unlinkSync(full);
+    }
+    const files = names
+      .filter((f) => f.endsWith('.json'))
+      .map((f) => ({ f, m: fs.statSync(path.join(SESSIONS_DIR, f)).mtimeMs }))
+      .sort((a, b) => b.m - a.m);
+    for (const { f } of files.slice(keep)) fs.unlinkSync(path.join(SESSIONS_DIR, f));
+    return Math.max(0, files.length - keep);
+  } catch {
+    return 0; // no sessions dir yet — nothing to clean
+  }
 }
 
-module.exports = { createServer, zipStore, crc32 };
+function startServer() {
+  const port = Number(process.env.PORT || 3210);
+  // bind localhost only: this is a single-user local app, and sessions/demos must not
+  // be reachable from the LAN. DEMO_FACTORY_HOST=0.0.0.0 opts out deliberately.
+  const host = process.env.DEMO_FACTORY_HOST || '127.0.0.1';
+  const server = createServer();
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`端口 ${port} 已经被占用了。可能上次的窗口还开着;关掉它,或者换个端口再启动:\nPORT=${port + 1} npm start`);
+    } else {
+      console.error(`启动没成功:${err.message}`);
+    }
+    process.exit(1);
+  });
+
+  server.listen(port, host, () => {
+    const removed = gcSessions();
+    if (removed) console.log(`(清理了 ${removed} 个旧会话文件)`);
+    console.log(`demo-factory 已启动 → http://localhost:${port}`);
+    // friendly heads-up if the engine CLI is missing — otherwise the novice only finds
+    // out at the first "开始" click. Non-blocking; the wizard still serves.
+    const { exec } = require('child_process');
+    exec('claude --version', (err) => {
+      if (err && !process.env.DEMO_FACTORY_CLAUDE) {
+        console.log('提示:没找到 claude 命令。要真正生成 demo,需要先安装并登录 Claude CLI —— 见 QUICKSTART.md。');
+      }
+    });
+  });
+
+  const shutdown = () => {
+    console.log('\n已停止。会话都存在 sessions/ 里,下次启动接着用。');
+    server.close(() => process.exit(0));
+    setTimeout(() => process.exit(0), 1500).unref(); // don't hang on open keep-alives
+  };
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
+  return server;
+}
+
+if (require.main === module) {
+  startServer();
+}
+
+module.exports = { createServer, startServer, zipStore, crc32, gcSessions };

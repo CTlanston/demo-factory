@@ -168,3 +168,31 @@ Append-only. Every "done" claim links to a fresh run artifact below.
 **POST-CONFIRMATION CHECKLIST (blocked on user):** ① user confirms repo name / LICENSE attribution / squash-export plan → ② `gh repo create` public from clean export → ③ fill `<repo-url>` in QUICKSTART + add Actions badge to README → ④ push → ⑤ Actions green → ⑥ tag v0.1.0 → ⑦ handoff RELEASED.
 
 **Cost:** this iteration $0 engine spend (screenshots replay a saved session; smoke used the stub).
+
+---
+
+## RELEASED — 2026-07-13 — v0.1.0 public
+
+- User confirmed release + "Lanston" attribution (AskUserQuestion, 2026-07-13).
+- Public repo: https://github.com/CTlanston/demo-factory (clean squash export; fresh history; internal contract docs absent — verified; final gitleaks on export: no leaks).
+- Actions run 29272016871: 3/3 jobs green — test(20) 10s, test(22) 7s, e2e-smoke-stubbed 15s with real log line `[1/1] PASS jz1 seed=0` (engine stubbed in CI by design, labeled).
+- Tag + Release: https://github.com/CTlanston/demo-factory/releases/tag/v0.1.0
+- DONE DEFINITION (§6): all boxes checked. Next milestone is NOT code: run FEEDBACK.md's 10-novice test. Kill criterion is live.
+
+---
+
+## Iteration 9 — 2026-07-13 — v0.2.0 hardening (production gaps, each verified)
+
+**Scope (user-selected: "本地产品硬化 v0.2", within contract YAGNI):**
+- **Security:** server binds 127.0.0.1 by default (was 0.0.0.0 — wizard + sessions were LAN-reachable). `DEMO_FACTORY_HOST` is a deliberate opt-out. Verified: unit test (loopback accepts, LAN interface refuses) + reviewer's independent curl probes (LAN refused; opt-out works).
+- **Windows:** engine spawns `claude` via a self-built quoted command line on win32 (array-args + shell:true silently DROPS the empty `--tools ""` — reviewer-demonstrated; the fix passes the exact quoted line through a real shell in a regression test using an argv-probe). Model name validated `^[A-Za-z0-9._-]+$` before entering the shell line (closes env-injection). `.js` engine stubs run via node on all platforms; no process groups on win32. Explicit test-file list (cmd.exe doesn't glob).
+- **sessions GC:** keep newest 200 + delete `.json.tmp` crash leftovers older than 1h (unit-tested; non-session files untouched; runs only in startServer).
+- **npx:** `bin/demo-factory.js` + files whitelist → `npx github:CTlanston/demo-factory`. Verified: bin boots + HTTP 200; reviewer re-verified from the packed tarball (personas/ absent, boots).
+- **Humane boot:** EADDRINUSE → plain-language message + PORT suggestion, no stack (tested); missing `claude` CLI → QUICKSTART pointer; graceful SIGINT with sessions-are-safe message.
+
+**Verification:** 48/48 unit tests (5 new). Real engine (POSIX path unchanged): SPAWN_V2_OK 4.4s + B1_FIX_OK 6.6s smokes + full real E2E cw2 PASS ($0.62, ledger-reconciled by reviewer). Stub e2e PASS. Review: REQUEST_CHANGES (B1 win32 arg-drop — real bug caught before any Windows user hit it; B2 CI-red assertion; M1 overbroad claim) → all fixed → **APPROVE**.
+
+**v0.2.0 TAG GATE:** tag only after public Actions run is green INCLUDING both Windows legs (unit matrix + stubbed e2e).
+**Disclosures:** (a) Windows verification is CI-with-stubbed-engine; the real `claude.cmd` path is NOT verified on a physical Windows machine (QUICKSTART says so; issues welcome). (b) win32 timeout kills the cmd.exe shell; a child under it may be orphaned (accepted: no process groups on win32; timeout path only). (c) self-set `DEMO_FACTORY_CLAUDE` containing `"` or `%VAR%` enters the win32 line raw (same self-set-env class as m2, accepted).
+
+**Cost:** 3 real engine calls (~$0.64). **Merge:** iter9-hardening → main (this commit).

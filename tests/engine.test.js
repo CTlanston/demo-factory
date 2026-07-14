@@ -89,5 +89,27 @@ test('is_error envelope is a failure', async () => {
 test('missing binary is a failure, not a crash', async () => {
   const r = await runEngine('x', { ...base, claudePath: '/nonexistent/claude', ledgerPath: ledgerFor('nobin') });
   assert.equal(r.ok, false);
-  assert.match(r.error, /spawn failed/);
+  // POSIX: ENOENT fires the 'error' event → "spawn failed". win32 shell branch: the
+  // shell itself spawns fine and exits non-zero (cmd.exe 9009) → "engine exited".
+  assert.match(r.error, /spawn failed|engine exited/);
+});
+
+test('win32 command line preserves the empty --tools argument through a real shell', async () => {
+  // The win32 branch builds `... --tools ""` as a single quoted line because array-args
+  // + shell:true silently DROP empty strings. Verify the quoted form survives an actual
+  // shell pass (sh here; cmd.exe treats "" the same way for argv splitting).
+  const { spawn } = require('child_process');
+  const path = require('path');
+  const probe = path.join(__dirname, 'fixtures', 'argv-probe.js');
+  const line = `"${process.execPath}" "${probe}" -p --output-format json --model "fake-model" --tools ""`;
+  const out = await new Promise((resolve) => {
+    const c = spawn(line, [], { shell: true, stdio: ['ignore', 'pipe', 'pipe'] });
+    let s = '';
+    c.stdout.on('data', (d) => (s += d));
+    c.on('close', () => resolve(s));
+  });
+  const argv = JSON.parse(out);
+  assert.equal(argv[argv.length - 1], ''); // the empty --tools value survived
+  assert.equal(argv[argv.length - 2], '--tools');
+  assert.equal(argv[argv.length - 3], 'fake-model');
 });

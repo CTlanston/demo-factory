@@ -11,9 +11,10 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest]
         node: [20, 22]
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +26,14 @@ jobs:
         run: npm test
 
   e2e-smoke-stubbed:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            chrome: /usr/bin/google-chrome
+          - os: windows-latest
+            chrome: C:\Program Files\Google\Chrome\Application\chrome.exe
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -36,6 +44,5 @@ jobs:
         env:
           DEMO_FACTORY_CLAUDE: ./tests/fixtures/fake-claude.js
           FAKE_CLAUDE_MODE: wizard
-          CHROME_PATH: /usr/bin/google-chrome
-        run: |
-          node personas/runner.js --personas jz1 --seeds 1 --port 3611
+          CHROME_PATH: ${{ matrix.chrome }}
+        run: node personas/runner.js --personas jz1 --seeds 1 --port 3611

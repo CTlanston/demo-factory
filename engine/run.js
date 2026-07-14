@@ -11,19 +11,36 @@ const DEFAULT_MODEL = process.env.DEMO_FACTORY_MODEL || 'claude-haiku-4-5-202510
 const DEFAULT_TIMEOUT_MS = Number(process.env.DEMO_FACTORY_TIMEOUT_MS) || 150 * 1000;
 const DEFAULT_LEDGER = process.env.DEMO_FACTORY_LEDGER || path.join(__dirname, '..', 'metrics', 'cost_ledger.jsonl');
 
+const IS_WINDOWS = process.platform === 'win32';
+
 // One claude -p call. Prompt goes over stdin (long prompts), result comes back
 // as the CLI's --output-format json envelope.
 function runOnce(prompt, { model, timeoutMs, claudePath }) {
   return new Promise((resolve) => {
     const started = Date.now();
+    const args = ['-p', '--output-format', 'json', '--model', model, '--tools', ''];
     // --tools "" = pure text generation: without it claude -p acts as an agent and may
     // *describe* the demo (or write files) instead of printing the document (seen in G2)
-    // detached → the child leads its own process group; on timeout we SIGKILL the whole
-    // group (-pid) so the CLI's own children are reaped, not orphaned
-    const child = spawn(claudePath, ['-p', '--output-format', 'json', '--model', model, '--tools', ''], {
-      stdio: ['pipe', 'pipe', 'pipe'],
-      detached: true,
-    });
+    // POSIX: detached → the child leads its own process group; on timeout we SIGKILL the
+    // whole group (-pid) so the CLI's own children are reaped, not orphaned.
+    // Windows: no process groups; `claude` resolves to claude.cmd which needs a shell.
+    // CAUTION: array-args + shell:true JOINS with spaces and silently DROPS the empty
+    // --tools "" argument (review-verified) — so on win32 we build the command line
+    // ourselves with explicit quoting. Model/path are shell-line fragments there, so
+    // they're validated first (also closes env-var injection).
+    // A .js engine stub (tests/CI) runs via node on every platform.
+    let child;
+    if (claudePath.endsWith('.js')) {
+      child = spawn(process.execPath, [claudePath, ...args], { stdio: ['pipe', 'pipe', 'pipe'], detached: !IS_WINDOWS });
+    } else if (IS_WINDOWS) {
+      if (!/^[A-Za-z0-9._-]+$/.test(model)) {
+        return resolve({ ok: false, durationMs: 0, error: `invalid model name for windows shell: ${model}` });
+      }
+      const line = `"${claudePath}" -p --output-format json --model "${model}" --tools ""`;
+      child = spawn(line, [], { stdio: ['pipe', 'pipe', 'pipe'], shell: true });
+    } else {
+      child = spawn(claudePath, args, { stdio: ['pipe', 'pipe', 'pipe'], detached: true });
+    }
     let stdout = '';
     let stderr = '';
     let timedOut = false;
@@ -33,7 +50,11 @@ function runOnce(prompt, { model, timeoutMs, claudePath }) {
     child.stderr.setEncoding('utf8');
     const timer = setTimeout(() => {
       timedOut = true;
-      try { process.kill(-child.pid, 'SIGKILL'); } catch { try { child.kill('SIGKILL'); } catch { /* already gone */ } }
+      if (IS_WINDOWS) {
+        try { child.kill('SIGKILL'); } catch { /* already gone */ }
+      } else {
+        try { process.kill(-child.pid, 'SIGKILL'); } catch { try { child.kill('SIGKILL'); } catch { /* already gone */ } }
+      }
     }, timeoutMs);
 
     const done = (out) => {

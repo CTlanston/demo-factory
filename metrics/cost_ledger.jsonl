@@ -2805,3 +2805,8 @@
 {"ts":"2026-07-13T03:33:45.924Z","purpose":"wizard:options:cb1c9e28","model":"claude-haiku-4-5-20251001","attempt":1,"ok":true,"duration_ms":37047,"cost_usd":0.022466700000000003,"input_tokens":10,"output_tokens":3543,"error":null}
 {"ts":"2026-07-13T03:34:25.609Z","purpose":"wizard:options:cb1c9e28","model":"claude-haiku-4-5-20251001","attempt":1,"ok":true,"duration_ms":39684,"cost_usd":0.026767049999999997,"input_tokens":10,"output_tokens":3609,"error":null}
 {"ts":"2026-07-13T03:36:42.619Z","purpose":"wizard:build:cb1c9e28","model":"claude-sonnet-5","attempt":1,"ok":true,"duration_ms":137007,"cost_usd":0.40928875,"input_tokens":2,"output_tokens":15195,"error":null}
+{"ts":"2026-07-14T20:37:02.831Z","purpose":"iter9-spawn-smoke","model":"claude-haiku-4-5-20251001","attempt":1,"ok":true,"duration_ms":4419,"cost_usd":0.0155695,"input_tokens":10,"output_tokens":56,"error":null}
+{"ts":"2026-07-14T20:37:52.459Z","purpose":"wizard:interview:f5841a52","model":"claude-haiku-4-5-20251001","attempt":1,"ok":true,"duration_ms":35169,"cost_usd":0.024555600000000004,"input_tokens":10,"output_tokens":3203,"error":null}
+{"ts":"2026-07-14T20:38:49.380Z","purpose":"wizard:options:f5841a52","model":"claude-haiku-4-5-20251001","attempt":1,"ok":true,"duration_ms":56918,"cost_usd":0.08193450000000001,"input_tokens":10,"output_tokens":5061,"error":null}
+{"ts":"2026-07-14T20:40:13.804Z","purpose":"wizard:build:f5841a52","model":"claude-sonnet-5","attempt":1,"ok":true,"duration_ms":84419,"cost_usd":0.510184,"input_tokens":2,"output_tokens":10333,"error":null}
+{"ts":"2026-07-14T20:52:58.970Z","purpose":"iter9-b1-smoke","model":"claude-haiku-4-5-20251001","attempt":1,"ok":true,"duration_ms":6649,"cost_usd":0.00827435,"input_tokens":10,"output_tokens":85,"error":null}
